@@ -2,7 +2,13 @@
     <div>
         <p>Completed Tasks: {{todos.filter(todo => todo.done === true).length}}</p>
         <p>Current Tasks: {{todos.filter(todo => todo.done === false).length}}</p>
-        <Todo v-on:delete-todo="deleteTodo" v-for="todo in todos" :todo="todo" :key="todo.id" />
+        <Todo
+            v-on:delete-todo="deleteTodo"
+            v-on:complete-todo="completeTodo"
+            v-for="todo in todos"
+            :todo="todo"
+            :key="todo.id"
+            />
         <CreateTodo v-on:create-todo="createTodo" />
     </div>
 </template>
@@ -29,6 +35,11 @@ export default {
             const newId = this.todos.map(todo => todo.id).reduce((a,b) => Math.max(a,b)) + 1;
             todo.id = newId;
             this.todos.push(todo);
+        },
+
+        completeTodo(todo) {
+            const todoIndex = this.todos.indexOf(todo);
+            this.todos[todoIndex].done = true;
         }
     }
 }
