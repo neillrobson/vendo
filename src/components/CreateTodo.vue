@@ -52,6 +52,8 @@ export default {
                     project,
                     done: false
                 });
+                this.titleText = '';
+                this.projectText = '';
             }
             this.closeForm();
         }
