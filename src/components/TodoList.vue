@@ -32,7 +32,7 @@ export default {
         },
 
         createTodo(todo) {
-            const newId = this.todos.map(todo => todo.id).reduce((a,b) => Math.max(a,b)) + 1;
+            const newId = this.todos.map(todo => todo.id).reduce((a,b) => Math.max(a,b), 0) + 1;
             todo.id = newId;
             this.todos.push(todo);
         },
