@@ -1,17 +1,20 @@
-const webpack = require('webpack');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
     publicPath: '/vendo/',
     configureWebpack: {
         plugins: [
-            new webpack.ProvidePlugin({
-                $: 'jquery',
-                jquery: 'jquery',
-                jQuery: 'jquery',
-                'window.jQuery': 'jquery'
-            }),
             new BundleAnalyzerPlugin()
-        ]
+        ],
+        optimization: {
+            splitChunks: {
+                maxSize: 244000
+            }
+        },
+        performance: {
+            assetFilter(filename) {
+                return !(/\.(map|css)$/.test(filename));
+            }
+        }
     }
 }

@@ -5,7 +5,7 @@ import { faEdit, faTrash, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import { ConfigProgrammatic, Icon, Button, Field, Input } from 'buefy'
-import 'buefy/dist/buefy.css'
+import 'buefy/dist/buefy.min.css'
 
 import App from './App.vue'
 
