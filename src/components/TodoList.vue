@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <p>Completed Tasks: {{todos.filter(todo => todo.done === true).length}}</p>
         <p>Current Tasks: {{todos.filter(todo => todo.done === false).length}}</p>
         <Todo
