@@ -1,12 +1,24 @@
 <template>
-    <div>
-        <b-button outlined v-show="!isCreating" @click="openForm" icon-right="plus" />
-        <div class="card" v-show="isCreating">
-            <div class="card-content">
-                <b-field label="Title"><b-input v-model="titleText" /></b-field>
-                <b-field label="Project"><b-input v-model="projectText" /></b-field>
-                <b-button type="is-info" outlined @click="sendForm">Create</b-button>
-                <b-button type="is-danger" outlined @click="closeForm">Cancel</b-button>
+    <div class="ui basic content center aligned segment">
+        <button class="ui basic button icon" v-on:click="openForm" v-show="!isCreating">
+            <i class="plus icon"></i>
+        </button>
+        <div class="ui centered card" v-show="isCreating">
+            <div class="content">
+                <div class="ui form">
+                    <div class="field">
+                        <label>Title</label>
+                        <input type="text" v-model="titleText">
+                    </div>
+                    <div class="field">
+                        <label>Project</label>
+                        <input type="text" v-model="projectText">
+                    </div>
+                    <div class="ui two button attached buttons">
+                        <button class="ui basic blue button" v-on:click="sendForm">Create</button>
+                        <button class="ui basic red button" v-on:click="closeForm">Cancel</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

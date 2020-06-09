@@ -1,20 +1,34 @@
 <template>
-    <div class="card">
-        <div class="card-content" v-show="!isEditing">
-            <div class="title">{{ todo.title }}</div>
-            <div class="subtitle">{{ todo.project }}</div>
+    <div class="ui centered card">
+        <div class="content" v-show="!isEditing">
+            <div class="header">{{ todo.title }}</div>
+            <div class="meta">{{ todo.project }}</div>
             <div class="extra content">
-                <b-icon icon="edit" @click.native="showForm" />
-                <b-icon icon="trash" @click.native="deleteTodo(todo)" />
+                <span class="right floated edit icon" v-on:click="showForm">
+                    <i class="edit icon"></i>
+                </span>
+                <span class="right floated trash icon" v-on:click="deleteTodo(todo)">
+                    <i class="trash icon"></i>
+                </span>
             </div>
         </div>
-        <div class="card-content" v-show="isEditing">
-            <b-field label="Title"><b-input v-model="todo.title" /></b-field>
-            <b-field label="Project"><b-input v-model="todo.project" /></b-field>
-            <b-button type="is-info" @click="hideForm">Close</b-button>
+        <div class="content" v-show="isEditing">
+            <div class="ui form">
+                <div class="field"><label for="">Title</label><input type="text" v-model="todo.title"></div>
+                <div class="field"><label for="">Project</label><input type="text" v-model="todo.project"></div>
+                <div class="ui two button attached buttons">
+                    <button class="ui basic blue button" v-on:click="hideForm">
+                        Close
+                    </button>
+                </div>
+            </div>
         </div>
-        <b-button type="is-danger" outlined v-show="!todo.done" @click="completeTodo(todo)">Complete</b-button>
-        <b-button type="is-success" outlined v-show="todo.done">Completed</b-button>
+        <div class="ui bottom attached basic button green" v-show="todo.done">
+            Completed
+        </div>
+        <div class="ui bottom attached basic button red" v-show="!todo.done" v-on:click="completeTodo(todo)">
+            Complete
+        </div>
     </div>
 </template>
 
