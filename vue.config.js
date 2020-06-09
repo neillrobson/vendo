@@ -6,6 +6,14 @@ module.exports = {
             openAnalyzer: false
         }
     },
+    chainWebpack: config => {
+        config
+            .plugin('html')
+            .tap(args => {
+                args[0].title = "Vendo";
+                return args;
+            });
+    },
     configureWebpack: {
         optimization: {
             splitChunks: {
