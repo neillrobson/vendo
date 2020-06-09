@@ -1,5 +1,6 @@
 module.exports = {
     publicPath: '/vendo/',
+    productionSourceMap: false,
     pluginOptions: {
         webpackBundleAnalyzer: {
             openAnalyzer: false
