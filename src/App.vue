@@ -1,17 +1,20 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
+    <Counter />
     <TodoList :todos="todos" />
   </div>
 </template>
 
 <script>
-import TodoList from "./components/TodoList.vue"
+import TodoList from "./components/TodoList"
+import Counter from "./components/Counter"
 
 export default {
   name: 'App',
   components: {
-    TodoList
+    TodoList,
+    Counter
   },
   data() {
     return {
