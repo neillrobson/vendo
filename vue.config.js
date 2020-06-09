@@ -1,15 +1,20 @@
-const webpack = require('webpack');
-
 module.exports = {
     publicPath: '/vendo/',
+    pluginOptions: {
+        webpackBundleAnalyzer: {
+            openAnalyzer: false
+        }
+    },
     configureWebpack: {
-        plugins: [
-            new webpack.ProvidePlugin({
-                $: 'jquery',
-                jquery: 'jquery',
-                jQuery: 'jquery',
-                'window.jQuery': 'jquery'
-            })
-        ]
+        optimization: {
+            splitChunks: {
+                maxSize: 244000
+            }
+        },
+        performance: {
+            assetFilter(filename) {
+                return !(/\.(map|svg)$/.test(filename));
+            }
+        }
     }
 }
