@@ -3,13 +3,14 @@
         <div class="content" v-show="!isEditing">
             <div class="header">{{ todo.title }}</div>
             <div class="meta">{{ todo.project }}</div>
-            <div class="extra content">
-                <span class="right floated edit icon" v-on:click="showForm">
+            <div class="ui divider"></div>
+            <div class="ui buttons basic icon">
+                <button class="ui button" @click="showForm">
                     <i class="edit icon"></i>
-                </span>
-                <span class="right floated trash icon" v-on:click="deleteTodo(todo)">
+                </button>
+                <button class="ui button" @click="deleteTodo(todo)">
                     <i class="trash icon"></i>
-                </span>
+                </button>
             </div>
         </div>
         <div class="content" v-show="isEditing">
