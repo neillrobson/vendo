@@ -3,7 +3,8 @@ module.exports = {
     productionSourceMap: false,
     pluginOptions: {
         webpackBundleAnalyzer: {
-            openAnalyzer: false
+            openAnalyzer: false,
+            analyzerMode: "server"
         }
     },
     chainWebpack: config => {
@@ -22,7 +23,7 @@ module.exports = {
         },
         performance: {
             assetFilter(filename) {
-                return !(/\.(map|svg)$/.test(filename));
+                return !(/\.(map|svg|css)$/.test(filename));
             }
         }
     }
