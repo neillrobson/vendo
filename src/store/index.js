@@ -5,7 +5,6 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    count: 0,
     todos: [{
       id: 1,
       title: 'Todo A',
@@ -33,12 +32,6 @@ export default new Vuex.Store({
     newTodoId: state => state.todos.map(todo => todo.id).reduce((a,b) => Math.max(a,b), 0) + 1
   },
   mutations: {
-    increment(state) {
-      state.count++;
-    },
-    decrement(state) {
-      state.count--;
-    },
     deleteTodoIndex(state, index) {
       state.todos.splice(index, 1);
     },
