@@ -1,15 +1,13 @@
 <template>
     <div>
-        <p>Completed Tasks: {{todos.filter(todo => todo.done === true).length}}</p>
-        <p>Current Tasks: {{todos.filter(todo => todo.done === false).length}}</p>
+        <p>Completed Tasks: {{ completedCount }}</p>
+        <p>Current Tasks: {{ currentCount }}</p>
         <Todo
-            v-on:delete-todo="deleteTodo"
-            v-on:complete-todo="completeTodo"
             v-for="todo in todos"
             :todo="todo"
             :key="todo.id"
             />
-        <CreateTodo v-on:create-todo="createTodo" />
+        <CreateTodo />
     </div>
 </template>
 
@@ -18,29 +16,23 @@ import Todo from "./Todo"
 import CreateTodo from "./CreateTodo"
 
 export default {
-    props: ["todos"],
+    computed: {
+        todos() {
+            return this.$store.state.todos;
+        },
+
+        completedCount() {
+            return this.$store.state.todos.filter(todo => todo.done).length;
+        },
+
+        currentCount() {
+            return this.$store.state.todos.filter(todo => !todo.done).length;
+        }
+    },
 
     components: {
         Todo,
         CreateTodo
-    },
-
-    methods: {
-        deleteTodo(todo) {
-            const todoIndex = this.todos.indexOf(todo);
-            this.todos.splice(todoIndex, 1);
-        },
-
-        createTodo(todo) {
-            const newId = this.todos.map(todo => todo.id).reduce((a,b) => Math.max(a,b), 0) + 1;
-            todo.id = newId;
-            this.todos.push(todo);
-        },
-
-        completeTodo(todo) {
-            const todoIndex = this.todos.indexOf(todo);
-            this.todos[todoIndex].done = true;
-        }
     }
 }
 </script>

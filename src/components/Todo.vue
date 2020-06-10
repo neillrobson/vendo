@@ -52,11 +52,11 @@ export default {
         },
 
         deleteTodo(todo) {
-            this.$emit('delete-todo', todo);
+            this.$store.dispatch('deleteTodo', todo);
         },
 
         completeTodo(todo) {
-            this.$emit('complete-todo', todo);
+            this.$store.dispatch('completeTodo', todo);
         }
     }
 }
