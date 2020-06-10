@@ -1,5 +1,5 @@
 <template>
-    <div class="ui basic content center aligned segment">
+    <div>
         <button class="ui basic button icon" v-on:click="openForm" v-show="!isCreating">
             <i class="plus icon"></i>
         </button>
@@ -14,10 +14,12 @@
                         <label>Project</label>
                         <input type="text" v-model="projectText">
                     </div>
-                    <div class="ui two button attached buttons">
-                        <button class="ui basic blue button" v-on:click="sendForm">Create</button>
-                        <button class="ui basic red button" v-on:click="closeForm">Cancel</button>
-                    </div>
+                </div>
+            </div>
+            <div class="extra content">
+                <div class="ui two buttons">
+                    <button class="ui basic blue button" v-on:click="sendForm">Create</button>
+                    <button class="ui basic red button" v-on:click="closeForm">Cancel</button>
                 </div>
             </div>
         </div>

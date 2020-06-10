@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div id="app" class="ui center aligned container">
         <img alt="Vue logo" src="./assets/logo.png" />
         <TodoList />
     </div>
@@ -21,7 +21,6 @@ export default {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-align: center;
     color: #2c3e50;
     padding-top: 60px;
 }

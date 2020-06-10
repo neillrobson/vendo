@@ -16,11 +16,9 @@
             <div class="ui form">
                 <div class="field"><label for="">Title</label><input type="text" v-model="todo.title"></div>
                 <div class="field"><label for="">Project</label><input type="text" v-model="todo.project"></div>
-                <div class="ui two button attached buttons">
-                    <button class="ui basic blue button" v-on:click="hideForm">
-                        Close
-                    </button>
-                </div>
+                <button class="ui basic blue button" v-on:click="hideForm">
+                    Close
+                </button>
             </div>
         </div>
         <div class="ui bottom attached basic button green" v-show="todo.done">
