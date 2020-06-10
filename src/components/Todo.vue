@@ -5,27 +5,27 @@
             <div class="meta">{{ todo.project }}</div>
             <div class="ui divider"></div>
             <div class="ui buttons basic icon">
-                <button class="ui button" @click="showForm">
+                <button :id="makeId('edit-todo')" class="ui button" @click="showForm">
                     <i class="edit icon"></i>
                 </button>
-                <button class="ui button" @click="deleteTodo(todo)">
+                <button :id="makeId('delete-todo')" class="ui button" @click="deleteTodo(todo)">
                     <i class="trash icon"></i>
                 </button>
             </div>
         </div>
         <div class="content" v-show="isEditing">
             <div class="ui form">
-                <div class="field"><label for="">Title</label><input type="text" v-model="todo.title"></div>
-                <div class="field"><label for="">Project</label><input type="text" v-model="todo.project"></div>
-                <button class="ui basic blue button" v-on:click="hideForm">
+                <div class="field"><label :for="titleInputId">Title</label><input :id="titleInputId" type="text" v-model="todo.title"></div>
+                <div class="field"><label :for="projectInputId">Project</label><input :id="projectInputId" type="text" v-model="todo.project"></div>
+                <button :id="makeId('todo-edit-close')" class="ui basic blue button" @click="hideForm">
                     Close
                 </button>
             </div>
         </div>
-        <div class="ui bottom attached basic button green" v-show="todo.done">
+        <div :id="makeId('todo-completed')" class="ui bottom attached basic button green" v-show="todo.done">
             Completed
         </div>
-        <div class="ui bottom attached basic button red" v-show="!todo.done" v-on:click="completeTodo(todo)">
+        <div :id="makeId('todo-complete')" class="ui bottom attached basic button red" v-show="!todo.done" v-on:click="completeTodo(todo)">
             Complete
         </div>
     </div>
@@ -41,7 +41,20 @@ export default {
         };
     },
 
+    computed: {
+        titleInputId() {
+            return this.makeId('todo-title-input');
+        },
+        projectInputId() {
+            return this.makeId('todo-project-input');
+        }
+    },
+
     methods: {
+        makeId(prefix) {
+            return prefix + '-' + this.todo.id;
+        },
+
         showForm() {
             this.isEditing = true;
         },
