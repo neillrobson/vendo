@@ -10,8 +10,6 @@ import './scripts/pendo'
 import './scripts/mock-backend'
 
 Axios.defaults.baseURL = publicPath
-Vue.prototype.$http = Axios
-
 Vue.config.productionTip = false
 
 new Vue({

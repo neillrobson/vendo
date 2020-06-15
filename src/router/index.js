@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/Home.vue'
 import Login from '@/views/Login.vue'
+import store from '@/store'
 
 Vue.use(VueRouter)
 
@@ -38,12 +39,8 @@ const router = new VueRouter({
   routes
 });
 
-function isLoggedIn() {
-  return localStorage.getItem('jwt') != null;
-}
-
-router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth) && !isLoggedIn()) {
+router.beforeEach((to, _from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth) && !store.getters.isLoggedIn) {
     next({
       path: '/login',
       params: { nextUrl: to.fullPath }
