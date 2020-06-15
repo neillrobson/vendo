@@ -16,6 +16,7 @@ module.exports = {
             });
     },
     configureWebpack: {
+        devtool: 'source-map',
         optimization: {
             splitChunks: {
                 maxSize: 244000
