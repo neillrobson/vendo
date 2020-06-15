@@ -12,21 +12,22 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import Todo from "./Todo"
 import CreateTodo from "./CreateTodo"
 
 export default {
     computed: {
-        todos() {
-            return this.$store.state.todos;
-        },
+        ...mapState({
+            todos: state => state.todo.todos
+        }),
 
         completedCount() {
-            return this.$store.state.todos.filter(todo => todo.done).length;
+            return this.todos.filter(todo => todo.done).length;
         },
 
         currentCount() {
-            return this.$store.state.todos.filter(todo => !todo.done).length;
+            return this.todos.filter(todo => !todo.done).length;
         }
     },
 
