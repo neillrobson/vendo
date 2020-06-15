@@ -42,7 +42,7 @@ export default {
             e.preventDefault();
 
             if (this.password.length > 0) {
-                this.$http.post('/login', {
+                this.$http.post('login', {
                     username: this.username,
                     password: this.password
                 }).then(response => {

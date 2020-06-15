@@ -4,9 +4,12 @@ import store from './store'
 import router from './router'
 import App from './App.vue'
 
+import { publicPath } from '../vue.config'
 import 'semantic-ui-css/semantic.min.css'
 import './scripts/pendo'
+import './scripts/mock-backend'
 
+Axios.defaults.baseURL = publicPath
 Vue.prototype.$http = Axios
 
 Vue.config.productionTip = false
