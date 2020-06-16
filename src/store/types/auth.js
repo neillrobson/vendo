@@ -1,11 +1,13 @@
 // Mutations
-export const AUTH_SUCCESS = "auth_success";
-export const AUTH_ERROR = "auth_error";
-export const AUTH_LOADING = "auth_loading";
+export const AUTH_SUCCESS = "Successful authentication";
+export const AUTH_ERROR = "Authentication error";
+export const AUTH_LOADING = "Authentication loading";
+export const AUTH_UNSET = "Unset authentication status";
 export const TOKEN = "token";
 
 // Actions
-export const LOGIN = "login";
+export const LOGIN = "Log in";
+export const LOGOUT = "Log out";
 
 // Statuses
 export const STATUS_SUCCESS = "success";

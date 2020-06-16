@@ -42,7 +42,7 @@ const router = new VueRouter({
 router.beforeEach((to, _from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth) && !store.getters.isLoggedIn) {
     next({
-      path: '/login',
+      name: 'Login',
       params: { nextUrl: to.fullPath }
     });
   } else {

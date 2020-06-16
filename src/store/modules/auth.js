@@ -3,8 +3,10 @@ import {
     AUTH_ERROR,
     AUTH_LOADING,
     AUTH_SUCCESS,
+    AUTH_UNSET,
     TOKEN,
     LOGIN,
+    LOGOUT,
     STATUS_SUCCESS,
     STATUS_ERROR,
     STATUS_LOADING
@@ -35,6 +37,13 @@ const actions = {
                 reject(error);
             });
         });
+    },
+    [LOGOUT]({ commit }) {
+        return new Promise(resolve => {
+            commit(TOKEN, null);
+            commit(AUTH_UNSET);
+            resolve();
+        });
     }
 };
 
@@ -48,9 +57,16 @@ const mutations = {
     [AUTH_LOADING](state) {
         state.status = STATUS_LOADING;
     },
+    [AUTH_UNSET](state) {
+        state.status = '';
+    },
     [TOKEN](state, token) {
         state.token = token ? token : null;
-        localStorage.setItem('token', state.token);
+        if (state.token) {
+            localStorage.setItem('token', state.token);
+        } else {
+            localStorage.removeItem('token');
+        }
     }
 };
 
