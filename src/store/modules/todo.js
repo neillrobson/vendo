@@ -1,3 +1,12 @@
+import {
+    COMPLETE_TODO,
+    COMPLETE_TODO_INDEX,
+    CREATE_TODO,
+    DELETE_TODO,
+    DELETE_TODO_INDEX,
+    ADD_TODO
+} from '../types/todo'
+
 export default {
     state: {
         todos: [{
@@ -27,28 +36,28 @@ export default {
         newTodoId: state => state.todos.map(todo => todo.id).reduce((a, b) => Math.max(a, b), 0) + 1
     },
     mutations: {
-        deleteTodoIndex(state, index) {
+        [DELETE_TODO_INDEX](state, index) {
             state.todos.splice(index, 1);
         },
-        createTodo(state, todo) {
+        [ADD_TODO](state, todo) {
             state.todos.push(todo);
         },
-        completeTodoIndex(state, index) {
+        [COMPLETE_TODO_INDEX](state, index) {
             state.todos[index].done = true;
         }
     },
     actions: {
-        deleteTodo(context, todo) {
+        [DELETE_TODO](context, todo) {
             const i = context.getters.todoIndex(todo);
-            context.commit('deleteTodoIndex', i);
+            context.commit(DELETE_TODO_INDEX, i);
         },
-        createTodo(context, todo) {
+        [CREATE_TODO](context, todo) {
             todo.id = context.getters.newTodoId;
-            context.commit('createTodo', todo);
+            context.commit(ADD_TODO, todo);
         },
-        completeTodo(context, todo) {
+        [COMPLETE_TODO](context, todo) {
             const i = context.getters.todoIndex(todo);
-            context.commit('completeTodoIndex', i);
+            context.commit(COMPLETE_TODO_INDEX, i);
         }
     }
 }

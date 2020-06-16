@@ -32,6 +32,8 @@
 </template>
 
 <script>
+import { COMPLETE_TODO, DELETE_TODO } from '@/store/types/todo'
+
 export default {
     props: ['todo'],
 
@@ -64,11 +66,11 @@ export default {
         },
 
         deleteTodo(todo) {
-            this.$store.dispatch('deleteTodo', todo);
+            this.$store.dispatch(DELETE_TODO, todo);
         },
 
         completeTodo(todo) {
-            this.$store.dispatch('completeTodo', todo);
+            this.$store.dispatch(COMPLETE_TODO, todo);
         }
     }
 }

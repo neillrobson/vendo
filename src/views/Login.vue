@@ -3,13 +3,13 @@
         <div class="column">
             <img src="@/assets/logo.png" alt="Vue logo">
             <form class="ui large form" @submit.prevent="handleSubmit">
-                <div class="ui message" v-if="authStatus === 'loading'">
+                <div class="ui message" v-if="authStatus === STATUS_LOADING">
                     <p>Logging in...</p>
                 </div>
-                <div class="ui message positive" v-if="authStatus === 'success'">
+                <div class="ui message positive" v-if="authStatus === STATUS_SUCCESS">
                     <p>You are authenticated!</p>
                 </div>
-                <div class="ui message negative" v-if="authStatus === 'error'">
+                <div class="ui message negative" v-if="authStatus === STATUS_ERROR">
                     <p>Invalid credentials</p>
                 </div>
                 <div class="ui stacked segment">
@@ -40,12 +40,16 @@
 
 <script>
 import { mapState } from 'vuex'
+import { LOGIN, STATUS_SUCCESS, STATUS_LOADING, STATUS_ERROR } from '@/store/types/auth'
 
 export default {
     data() {
         return {
             username: "",
-            password: ""
+            password: "",
+            STATUS_SUCCESS,
+            STATUS_LOADING,
+            STATUS_ERROR
         }
     },
     computed: mapState({
@@ -55,7 +59,7 @@ export default {
         handleSubmit() {
             let username = this.username,
                 password = this.password;
-            this.$store.dispatch('login', {username, password}).then(() => {
+            this.$store.dispatch(LOGIN, {username, password}).then(() => {
                 if (this.$route.params.nextUrl != null) {
                     this.$router.push(this.$route.params.nextUrl);
                 } else {
