@@ -4,7 +4,6 @@ import MockAdapter from 'axios-mock-adapter'
 var mock = new MockAdapter(Axios);
 
 const PASSWORD = "letmein";
-const TOKEN = "token";
 
 mock.onPost('/login').reply(config => {
     return new Promise(resolve => {
@@ -16,7 +15,7 @@ mock.onPost('/login').reply(config => {
                 resolve([400]);
             }
             if (PASSWORD === data.password) {
-                resolve([200, { token: TOKEN }]);
+                resolve([200, { token: data.username }]);
             } else {
                 resolve([401]);
             }

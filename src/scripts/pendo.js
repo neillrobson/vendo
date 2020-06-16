@@ -9,8 +9,4 @@
     })(window, document, 'script', 'pendo');
 })('697ae132-66e8-47f4-6858-96da721a7d3c');
 
-// Initialize on startup
-(function () {
-    var vid = prompt("Enter your Visitor ID (leave blank for hardcoded default):").trim() || 'Neill-Hardcoded';
-    window.pendo.initialize({ visitor: { id: vid } })
-})();
+export default window.pendo;

@@ -41,12 +41,18 @@
 
 <script>
 import { LOGOUT } from "./store/types/auth";
-import { mapGetters } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
+import pendo from "./scripts/pendo";
 
 export default {
-    computed: mapGetters([
-        'isLoggedIn'
-    ]),
+    computed: {
+        ...mapState({
+            token: state => state.auth.token
+        }),
+        ...mapGetters([
+            'isLoggedIn'
+        ])
+    },
     methods: {
         logOut() {
             this.$store.dispatch(LOGOUT).then(() => {
@@ -57,6 +63,15 @@ export default {
                     });
                 }
             });
+        }
+    },
+    mounted() {
+        if (this.isLoggedIn) {
+            if (pendo.isReady()) {
+                pendo.identify({ visitor: { id: this.token } });
+            } else {
+                pendo.initialize({ visitor: { id: this.token } });
+            }
         }
     }
 };
