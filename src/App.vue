@@ -1,10 +1,14 @@
 <template>
     <div id="app">
         <div id="nav">
-            <router-link to="/">Home</router-link>
-            | <router-link to="/about">About</router-link>
+            <router-link :to="{ name: 'Home' }">Home</router-link>
+            | <router-link :to="{ name: 'Todo Application' }">Todo List</router-link>
+            | <router-link :to="{ name: 'Account' }">My Account</router-link>
+            <span v-if="!isLoggedIn">
+                | <router-link :to="{ name: 'Login' }">Log In</router-link>
+            </span>
             <span v-if="isLoggedIn">
-                | <a @click="logOut">Log out</a>
+                | <a @click="logOut">Log Out</a>
             </span>
         </div>
         <router-view />
