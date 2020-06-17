@@ -42,7 +42,7 @@
 <script>
 import { LOGOUT } from "./store/types/auth";
 import { mapGetters, mapState } from 'vuex';
-import pendo from "./scripts/pendo";
+import pendoIdentify from "@/scripts/pendo";
 
 export default {
     computed: {
@@ -67,11 +67,7 @@ export default {
     },
     mounted() {
         if (this.isLoggedIn) {
-            if (pendo.isReady()) {
-                pendo.identify({ visitor: { id: this.token } });
-            } else {
-                pendo.initialize({ visitor: { id: this.token } });
-            }
+            pendoIdentify({ visitor: { id: this.token } });
         }
     }
 };

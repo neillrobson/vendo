@@ -11,7 +11,7 @@ import {
     STATUS_ERROR,
     STATUS_LOADING
 } from '../types/auth'
-import pendo from '@/scripts/pendo';
+import pendoIdentify from "@/scripts/pendo";
 
 const state = {
     status: '',
@@ -31,12 +31,8 @@ const actions = {
             .then(response => {
                 commit(TOKEN, response.data.token);
                 commit(AUTH_SUCCESS);
+                pendoIdentify({ visitor: { id: response.data.token } });
                 resolve(response);
-                if (pendo.isReady()) {
-                    pendo.identify({ visitor: { id: response.data.token } });
-                } else {
-                    pendo.initialize({ visitor: { id: response.data.token } });
-                }
             })
             .catch(error => {
                 commit(AUTH_ERROR);

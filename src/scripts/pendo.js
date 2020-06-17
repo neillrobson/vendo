@@ -9,4 +9,11 @@
     })(window, document, 'script', 'pendo');
 })('697ae132-66e8-47f4-6858-96da721a7d3c');
 
-export default window.pendo;
+export default function (userData) {
+    let p = window.pendo;
+    if ("function" === typeof p.isReady && p.isReady()) {
+        p.identify(userData);
+    } else {
+        p.initialize(userData);
+    }
+}
