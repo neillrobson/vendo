@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Not Found</title>
+    <!-- Redirect all caught requests to the homepage. -->
+    <script>
+      sessionStorage.redirect = location.href;
+    </script>
+    <meta http-equiv="refresh" content="0;URL='/vendo/'">
+  </head>
+  <!--
+    According to https://www.smashingmagazine.com/2016/08/sghpa-single-page-app-hack-github-pages/, this file must be at least 512 bytes
+    for Internet Explorer to consider it a valid 404 page. Otherwise, the browser will ignore it and render its own "solution." Ugh.
+  -->
+</html>

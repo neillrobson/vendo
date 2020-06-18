@@ -27,5 +27,12 @@ module.exports = {
                 return !(/\.(map|svg|css)$/.test(filename));
             }
         }
+    },
+    // Make the dev server act like Github pages
+    devServer: {
+        historyApiFallback: {
+            verbose: true,
+            index: '/404.html'
+        }
     }
 }
