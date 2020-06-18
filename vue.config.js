@@ -4,7 +4,7 @@ module.exports = {
     pluginOptions: {
         webpackBundleAnalyzer: {
             openAnalyzer: false,
-            analyzerMode: "server"
+            analyzerMode: "disabled"
         }
     },
     chainWebpack: config => {
@@ -26,13 +26,6 @@ module.exports = {
             assetFilter(filename) {
                 return !(/\.(map|svg|css)$/.test(filename));
             }
-        }
-    },
-    // Make the dev server act like Github pages
-    devServer: {
-        historyApiFallback: {
-            verbose: true,
-            index: '/404.html'
         }
     }
 }

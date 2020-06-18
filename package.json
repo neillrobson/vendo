@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --no-clean",
     "lint": "vue-cli-service lint",
-    "prebuild": "rimraf 'dist/**/!(.git)'"
+    "prebuild": "rimraf 'dist/**/!(.git)'",
+    "postbuild": "cp dist/index.html dist/404.html"
   },
   "dependencies": {
     "axios": "^0.18.0",
