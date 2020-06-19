@@ -5,11 +5,12 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --no-clean",
+    "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "prebuild": "rimraf 'dist/**/!(.git)'",
+    "deploy": "cd dist && git add . && git commit -m \"v$npm_package_version\" && git push",
     "postbuild": "cp dist/index.html dist/404.html",
-    "predeploy": "npm run build",
-    "deploy": "cd dist && git add . && git commit -m \"v$npm_package_version\" && git push"
+    "prebuild": "rimraf 'dist/**/!(.git)'",
+    "predeploy": "npm run build"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -24,8 +25,10 @@
     "@vue/cli-plugin-babel": "~4.4.0",
     "@vue/cli-plugin-eslint": "~4.4.0",
     "@vue/cli-plugin-router": "^4.4.4",
+    "@vue/cli-plugin-unit-jest": "^4.4.4",
     "@vue/cli-plugin-vuex": "^4.4.1",
     "@vue/cli-service": "~4.4.0",
+    "@vue/test-utils": "^1.0.3",
     "babel-eslint": "^10.1.0",
     "cypress": "^4.8.0",
     "eslint": "^6.7.2",
@@ -48,7 +51,18 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "rules": {},
+    "overrides": [
+      {
+        "files": [
+          "**/__tests__/*.{j,t}s?(x)",
+          "**/tests/unit/**/*.spec.{j,t}s?(x)"
+        ],
+        "env": {
+          "jest": true
+        }
+      }
+    ]
   },
   "browserslist": [
     "> 1%",
