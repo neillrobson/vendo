@@ -3,7 +3,8 @@ import Vuex from 'vuex'
 import todo from './modules/todo'
 import auth from './modules/auth'
 import user from './modules/user'
-import { LOCAL_STORAGE_USER_ID } from './types/user'
+import persist from '@/scripts/local-persistence'
+import { USER_MUTATION_PREFIX, LOCAL_STORAGE_USER_ID } from './types/user'
 
 Vue.use(Vuex);
 
@@ -15,10 +16,6 @@ const store = new Vuex.Store({
   }
 });
 
-store.subscribe((mutation, state) => {
-  if (mutation.type.startsWith("user")) {
-    localStorage.setItem(LOCAL_STORAGE_USER_ID, JSON.stringify(state.user));
-  }
-});
+persist(store, "user", USER_MUTATION_PREFIX, LOCAL_STORAGE_USER_ID);
 
 export default store;
