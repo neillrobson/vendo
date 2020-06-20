@@ -1,4 +1,5 @@
 import Axios from 'axios'
+import jwt from 'jsonwebtoken'
 import '@/scripts/mock-backend'
 
 Axios.defaults.validateStatus = () => true;
@@ -10,8 +11,9 @@ describe("Mock Backend", () => {
             password: "letmein"
         });
         expect(response.status).toBe(200);
-        expect(response.data.username).toBe("nerob");
-        expect(response.data.role).toBe("user");
+        let data = jwt.decode(response.data);
+        expect(data.username).toBe("nerob");
+        expect(data.role).toBe("user");
     })
 
     test("Login with ill-formed data", async () => {

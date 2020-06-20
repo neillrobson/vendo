@@ -1,10 +1,13 @@
 import Axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 
 var mock = new MockAdapter(Axios);
 
-const PASSWORD = "letmein";
+// This is obviously insecure. Never, ever pass the JWT secret to the frontend.
+// We're only doing it in this case to create a mock backend for the demo app.
+const SECRET = "secret";
 
 const DEFAULT_USERS = {
     nerob: {
@@ -53,10 +56,11 @@ mock.onPost('/login').reply(config => {
     }
     return bcrypt.compare(password, user.password).then(match => {
         if (match) {
-            return [200, {
+            let token = jwt.sign({
                 username,
                 role: user.role
-            }];
+            }, SECRET);
+            return [200, token];
         } else {
             return [401, "Incorrect password"];
         }
