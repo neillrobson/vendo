@@ -8,10 +8,11 @@ var mock = new MockAdapter(Axios);
 // This is obviously insecure. Never, ever pass the JWT secret to the frontend.
 // We're only doing it in this case to create a mock backend for the demo app.
 const SECRET = "secret";
+const ROUNDS = 10;
 
 const DEFAULT_USERS = {
     nerob: {
-        password: bcrypt.hashSync("letmein", 10),
+        password: bcrypt.hashSync("letmein", ROUNDS),
         role: "user"
     }
 };
@@ -22,20 +23,17 @@ class UserStorage {
     }
 
     getUsers() {
-        if (!this.users) {
-            let local = localStorage.getItem(this.localStorageKey);
-            if (local) {
-                this.users = JSON.parse(local);
-            } else {
-                this.users = DEFAULT_USERS;
-                this.setUsers();
-            }
+        let local = localStorage.getItem(this.key);
+        if (local) {
+            return JSON.parse(local);
+        } else {
+            this.setUsers(DEFAULT_USERS);
+            return DEFAULT_USERS;
         }
-        return this.users;
     }
 
-    setUsers() {
-        localStorage.setItem(this.localStorageKey, this.users);
+    setUsers(users) {
+        localStorage.setItem(this.key, JSON.stringify(users));
     }
 }
 
@@ -65,4 +63,25 @@ mock.onPost('/login').reply(config => {
             return [401, "Incorrect password"];
         }
     });
+});
+
+mock.onPost('/register').reply(async config => {
+    let username, role, rawPassword;
+    try {
+        let data = JSON.parse(config.data);
+        ({ username, role, password: rawPassword } = data);
+        if (!username || !role || !rawPassword) {
+            throw "Missing required field";
+        }
+    } catch (error) {
+        return [400];
+    }
+    let users = userStorage.getUsers();
+    if (users[username]) {
+        return [422, "Username already exists"];
+    }
+    let password = await bcrypt.hash(rawPassword, ROUNDS);
+    users[username] = { role, password };
+    userStorage.setUsers(users);
+    return [201];
 });
