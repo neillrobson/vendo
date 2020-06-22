@@ -1,7 +1,7 @@
 import Axios from 'axios'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import '@/scripts/mock-backend'
+import { LOCAL_STORAGE_KEY } from '@/scripts/mock-backend'
 
 Axios.defaults.validateStatus = () => true;
 
@@ -14,7 +14,7 @@ const DEFAULT_USERS = {
 
 describe("Mock Login", () => {
     beforeEach(() => {
-        localStorage.setItem("users", JSON.stringify(DEFAULT_USERS));
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(DEFAULT_USERS));
     })
 
     test("Login with valid credentials", async () => {
@@ -50,11 +50,21 @@ describe("Mock Login", () => {
         expect(response.status).toBe(401);
         expect(response.data).toContain("password");
     })
+
+    test("Login with no data in local storage", async () => {
+        localStorage.removeItem(LOCAL_STORAGE_KEY);
+        const response = await Axios.post("login", {
+            username: "nerob",
+            password: "letmein"
+        });
+        expect(response.status).toBe(401);
+        expect(response.data).toContain("username");
+    })
 })
 
 describe("Mock Register", () => {
     beforeEach(() => {
-        localStorage.setItem("users", JSON.stringify(DEFAULT_USERS));
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(DEFAULT_USERS));
     })
 
     test("Valid request", async () => {
@@ -64,7 +74,7 @@ describe("Mock Register", () => {
             role: "frontend"
         });
         expect(response.status).toBe(201);
-        let users = JSON.parse(localStorage.getItem("users"));
+        let users = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
         expect(users["ajax"]).toBeDefined();
     })
 

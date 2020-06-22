@@ -5,6 +5,8 @@ import jwt from 'jsonwebtoken'
 
 var mock = new MockAdapter(Axios);
 
+export const LOCAL_STORAGE_KEY = "users";
+
 // This is obviously insecure. Never, ever pass the JWT secret to the frontend.
 // We're only doing it in this case to create a mock backend for the demo app.
 const SECRET = "secret";
@@ -15,22 +17,22 @@ class UserStorage {
         this.key = localStorageKey;
     }
 
-    getUsers() {
+    get users() {
         let local = localStorage.getItem(this.key);
         if (local) {
             return JSON.parse(local);
         } else {
-            this.setUsers({});
-            return {};
+            this.users = {};
+            return this.users;
         }
     }
 
-    setUsers(users) {
+    set users(users) {
         localStorage.setItem(this.key, JSON.stringify(users));
     }
 }
 
-var userStorage = new UserStorage("users");
+var userStorage = new UserStorage(LOCAL_STORAGE_KEY);
 
 mock.onPost('/login').reply(config => {
     let username;
@@ -41,7 +43,7 @@ mock.onPost('/login').reply(config => {
     } catch (error) {
         return [400];
     }
-    let user = userStorage.getUsers()[username];
+    let user = userStorage.users[username];
     if (!user) {
         return [401, "Unrecognized username"];
     }
@@ -69,12 +71,12 @@ mock.onPost('/register').reply(async config => {
     } catch (error) {
         return [400];
     }
-    let users = userStorage.getUsers();
+    let users = userStorage.users;
     if (users[username]) {
         return [422, "Username already exists"];
     }
     let password = await bcrypt.hash(rawPassword, ROUNDS);
     users[username] = { role, password };
-    userStorage.setUsers(users);
+    userStorage.users = users;
     return [201];
 });
