@@ -1,5 +1,5 @@
 import Axios from 'axios'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { LOCAL_STORAGE_KEY } from '@/scripts/mock-backend'
 

@@ -1,6 +1,6 @@
 import Axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
 var mock = new MockAdapter(Axios);
