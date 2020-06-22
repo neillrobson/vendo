@@ -34,6 +34,14 @@ class UserStorage {
 
 var userStorage = new UserStorage(LOCAL_STORAGE_KEY);
 
+function getTokenForUser(username) {
+    let user = userStorage.users[username];
+    return jwt.sign({
+        username,
+        role: user.role
+    }, SECRET);
+}
+
 mock.onPost('/login').reply(config => {
     let username;
     let password;
@@ -49,11 +57,7 @@ mock.onPost('/login').reply(config => {
     }
     return bcrypt.compare(password, user.password).then(match => {
         if (match) {
-            let token = jwt.sign({
-                username,
-                role: user.role
-            }, SECRET);
-            return [200, token];
+            return [200, getTokenForUser(username)];
         } else {
             return [401, "Incorrect password"];
         }
@@ -79,4 +83,52 @@ mock.onPost('/register').reply(async config => {
     users[username] = { role, password };
     userStorage.users = users;
     return [201];
+});
+
+mock.onPut("/edit").reply(async config => {
+    // ### Authorization ###
+    const BEARER_PREFIX = 'Bearer ';
+    let auth = config.headers.Authorization;
+    if (!auth) {
+        return [401, "No authorization header given"];
+    }
+    if (!auth.startsWith(BEARER_PREFIX)) {
+        return [401, "Authorization header does not follow \"Bearer\" scheme"];
+    }
+    let token = auth.substring(BEARER_PREFIX.length);
+    let payload;
+    try { 
+        payload = jwt.verify(token, SECRET);
+    } catch (error) {
+        return [401, "Invalid JWT"];
+    }
+
+    // ### Data Initialization ###
+    let oldUsername = payload.username;
+    let data;
+    try {
+        data = JSON.parse(config.data);
+    } catch (error) {
+        return [400];
+    }
+    let username, role, rawPassword;
+    ({ username, role, password: rawPassword } = data);
+    let users = userStorage.users;
+
+    // ### User Modification ###
+    if (username && username !== oldUsername) {
+        if (users[username]) {
+            return [422, "Username already exists"];
+        }
+        users[username] = users[oldUsername];
+        delete users[oldUsername];
+    } else {
+        username = oldUsername;
+    }
+    if (rawPassword) {
+        users[username].password = await bcrypt.hash(rawPassword, ROUNDS);
+    }
+    users[username].role = role || users[username].role;
+    userStorage.users = users;
+    return [200, getTokenForUser(username)];
 });
