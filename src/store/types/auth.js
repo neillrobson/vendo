@@ -8,6 +8,7 @@ export const TOKEN = "token";
 // Actions
 export const LOGIN = "Log in";
 export const LOGOUT = "Log out";
+export const PENDO_IDENTIFY = "Send user credentials to Pendo";
 
 // Statuses
 export const STATUS_SUCCESS = "success";

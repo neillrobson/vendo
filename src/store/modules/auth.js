@@ -1,4 +1,5 @@
 import Axios from 'axios'
+import jwt from 'jsonwebtoken'
 import {
     AUTH_ERROR,
     AUTH_LOADING,
@@ -9,7 +10,8 @@ import {
     LOGOUT,
     STATUS_SUCCESS,
     STATUS_ERROR,
-    STATUS_LOADING
+    STATUS_LOADING,
+    PENDO_IDENTIFY
 } from '../types/auth'
 import pendoIdentify from "@/scripts/pendo";
 
@@ -19,19 +21,29 @@ const state = {
 };
 
 const getters = {
-    isLoggedIn: (state) => state.token != null
+    isLoggedIn: (state) => state.token != null,
+    userData: (state, getters) => {
+        if (!getters.isLoggedIn) return {};
+        return jwt.decode(state.token);
+    },
+    username: (_state, getters) => {
+        return getters.userData.username;
+    },
+    role: (_state, getters) => {
+        return getters.userData.role;
+    }
 };
 
 const actions = {
-    [LOGIN]({ commit }, info) {
+    [LOGIN]({ commit, dispatch }, info) {
         return new Promise((resolve, reject) => {
             commit(TOKEN, null);
             commit(AUTH_LOADING);
             Axios.post('login', info)
             .then(response => {
-                commit(TOKEN, response.data.token);
+                commit(TOKEN, response.data);
                 commit(AUTH_SUCCESS);
-                pendoIdentify({ visitor: { id: response.data.token } });
+                dispatch(PENDO_IDENTIFY);
                 resolve(response);
             })
             .catch(error => {
@@ -46,6 +58,9 @@ const actions = {
             commit(AUTH_UNSET);
             resolve();
         });
+    },
+    [PENDO_IDENTIFY]({ getters }) {
+        pendoIdentify({ visitor: { id: getters.username } });
     }
 };
 

@@ -40,9 +40,8 @@
 </style>
 
 <script>
-import { LOGOUT } from "./store/types/auth";
-import { mapGetters, mapState } from 'vuex';
-import pendoIdentify from "@/scripts/pendo";
+import { LOGOUT, PENDO_IDENTIFY } from "./store/types/auth";
+import { mapGetters, mapState, mapActions } from 'vuex';
 
 export default {
     computed: {
@@ -54,6 +53,9 @@ export default {
         ])
     },
     methods: {
+        ...mapActions({
+            pendoIdentify: PENDO_IDENTIFY
+        }),
         logOut() {
             this.$store.dispatch(LOGOUT).then(() => {
                 if (this.$route.meta.requiresAuth) {
@@ -67,7 +69,7 @@ export default {
     },
     mounted() {
         if (this.isLoggedIn) {
-            pendoIdentify({ visitor: { id: this.token } });
+            this.pendoIdentify();
         }
     }
 };
