@@ -13,6 +13,10 @@ const DEFAULT_USERS = {
 };
 
 describe("Mock Login", () => {
+    beforeEach(() => {
+        localStorage.setItem("users", JSON.stringify(DEFAULT_USERS));
+    })
+
     test("Login with valid credentials", async () => {
         const response = await Axios.post("login", {
             username: "nerob",

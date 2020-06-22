@@ -10,13 +10,6 @@ var mock = new MockAdapter(Axios);
 const SECRET = "secret";
 const ROUNDS = 10;
 
-const DEFAULT_USERS = {
-    nerob: {
-        password: bcrypt.hashSync("letmein", ROUNDS),
-        role: "user"
-    }
-};
-
 class UserStorage {
     constructor(localStorageKey) {
         this.key = localStorageKey;
@@ -27,8 +20,8 @@ class UserStorage {
         if (local) {
             return JSON.parse(local);
         } else {
-            this.setUsers(DEFAULT_USERS);
-            return DEFAULT_USERS;
+            this.setUsers({});
+            return {};
         }
     }
 
