@@ -4,12 +4,11 @@ import store from './store'
 import router from './router'
 import App from './App.vue'
 
-import { publicPath } from '../vue.config'
 import 'semantic-ui-css/semantic.min.css'
 import './scripts/mock-backend'
 import { INIT_USER } from './store/types/user'
 
-Axios.defaults.baseURL = publicPath
+Axios.defaults.baseURL = process.env.BASE_URL
 Vue.config.productionTip = false
 
 new Vue({

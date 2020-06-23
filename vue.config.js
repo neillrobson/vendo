@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 module.exports = {
     publicPath: '/vendo/',
     productionSourceMap: false,
@@ -27,5 +29,21 @@ module.exports = {
                 return !(/\.(map|svg|css)$/.test(filename));
             }
         }
+    },
+    devServer: devServer()
+}
+
+function devServer() {
+    const config = {
+        host: 'localhost'
+    };
+
+    if (fs.existsSync('./local-ssl/localhost.key') && fs.existsSync('./local-ssl/localhost.crt')) {
+        config.https = {
+            key: fs.readFileSync('./local-ssl/localhost.key'),
+            cert: fs.readFileSync('./local-ssl/localhost.crt')
+        };
     }
+
+    return config;
 }
