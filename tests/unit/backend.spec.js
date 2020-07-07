@@ -13,10 +13,12 @@ const DEFAULT_PASSWORD_2 = "keepass";
 const DEFAULT_ROLE_2 = "frontend";
 const DEFAULT_USERS = {
     [DEFAULT_USERNAME]: {
+        username: DEFAULT_USERNAME,
         password: bcrypt.hashSync(DEFAULT_PASSWORD, 10),
         role: DEFAULT_ROLE
     },
     [DEFAULT_USERNAME_2]: {
+        username: DEFAULT_USERNAME_2,
         password: bcrypt.hashSync(DEFAULT_PASSWORD_2, 10),
         role: DEFAULT_ROLE_2
     }
@@ -171,10 +173,80 @@ describe("Mock Edit User", () => {
         expect(response.status).toBe(400);
     })
 
+    test("Incorrect/missing current password", async () => {
+        let response = await Axios.put("edit", {
+            currentPassword: "not-the-right-password",
+            userInfo: {
+                username: "new-username",
+                role: "backend"
+            }
+        }, {
+            headers: {
+                Authorization: `Bearer ${nerobToken}`
+            }
+        });
+        expect(response.status).toBe(401);
+        expect(response.data).toContain("Incorrect password");
+
+        response = await Axios.put("edit", {
+            userInfo: {
+                username: "new-username",
+                role: "backend"
+            }
+        }, {
+            headers: {
+                Authorization: `Bearer ${nerobToken}`
+            }
+        });
+        expect(response.status).toBe(401);
+        expect(response.data).toContain("Incorrect password");
+    })
+
+    test("Missing/empty user info", async () => {
+        let response = await Axios.put("edit", {
+            currentPassword: DEFAULT_PASSWORD,
+            userInfo: { }
+        }, {
+            headers: {
+                Authorization: `Bearer ${nerobToken}`
+            }
+        });
+        expect(response.status).toBe(200);
+        response = await Axios.post("login", {
+            username: DEFAULT_USERNAME,
+            password: DEFAULT_PASSWORD
+        });
+        expect(response.status).toBe(200);
+
+        response = await Axios.put("edit", {
+            currentPassword: DEFAULT_PASSWORD
+        }, {
+            headers: {
+                Authorization: `Bearer ${nerobToken}`
+            }
+        });
+        expect(response.status).toBe(400);
+        expect(response.data).toContain("parse user info");
+
+        response = await Axios.put("edit", {
+            currentPassword: DEFAULT_PASSWORD,
+            userInfo: "my information"
+        }, {
+            headers: {
+                Authorization: `Bearer ${nerobToken}`
+            }
+        });
+        expect(response.status).toBe(400);
+        expect(response.data).toContain("parse user info");
+    })
+
     test("Duplicate username", async () => {
         const response = await Axios.put("edit", {
-            username: DEFAULT_USERNAME_2,
-            role: "backend"
+            currentPassword: DEFAULT_PASSWORD,
+            userInfo: {
+                username: DEFAULT_USERNAME_2,
+                role: "backend"
+            }
         }, {
             headers: {
                 Authorization: `Bearer ${nerobToken}`
@@ -186,7 +258,10 @@ describe("Mock Edit User", () => {
     test("Change password", async () => {
         const NEW_PASSWORD = "@x10$";
         let response = await Axios.put("edit", {
-            password: NEW_PASSWORD
+            currentPassword: DEFAULT_PASSWORD,
+            userInfo: {
+                password: NEW_PASSWORD
+            }
         }, {
             headers: {
                 Authorization: `Bearer ${nerobToken}`
@@ -203,7 +278,10 @@ describe("Mock Edit User", () => {
     test("Change username", async () => {
         const NEW_USERNAME = "ajax";
         let response = await Axios.put("edit", {
-            username: NEW_USERNAME
+            currentPassword: DEFAULT_PASSWORD,
+            userInfo: {
+                username: NEW_USERNAME
+            }
         }, {
             headers: {
                 Authorization: `Bearer ${nerobToken}`
@@ -215,6 +293,9 @@ describe("Mock Edit User", () => {
             password: DEFAULT_PASSWORD
         });
         expect(response.status).toBe(200);
+        const storage = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+        expect(storage[DEFAULT_USERNAME]).toBeUndefined();
+        expect(storage[NEW_USERNAME]).toBeDefined();
     })
 
     test("Change everything", async () => {
@@ -222,9 +303,12 @@ describe("Mock Edit User", () => {
         const NEW_USERNAME = "ajax";
         const NEW_PASSWORD = "super-secure";
         let response = await Axios.put("edit", {
-            role: NEW_ROLE,
-            username: NEW_USERNAME,
-            password: NEW_PASSWORD
+            currentPassword: DEFAULT_PASSWORD,
+            userInfo: {
+                role: NEW_ROLE,
+                username: NEW_USERNAME,
+                password: NEW_PASSWORD
+            }
         }, {
             headers: {
                 Authorization: `Bearer ${nerobToken}`
