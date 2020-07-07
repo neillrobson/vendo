@@ -35,6 +35,7 @@ import bcrypt from 'bcryptjs'
 
 const DEFAULT_USERS = {
     nerob: {
+        username: "nerob",
         password: bcrypt.hashSync("letmein", 10),
         role: "user"
     }

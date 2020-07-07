@@ -8,6 +8,7 @@ import {
     TOKEN,
     LOGIN,
     LOGOUT,
+    UPDATE,
     STATUS_SUCCESS,
     STATUS_ERROR,
     STATUS_LOADING,
@@ -61,6 +62,15 @@ const actions = {
     },
     [PENDO_IDENTIFY]({ getters }) {
         pendoIdentify({ visitor: { id: getters.username } });
+    },
+    async [UPDATE]({ commit, dispatch, state }, info) {
+        const response = await Axios.put('edit', info, {
+            headers: {
+                Authorization: `Bearer ${state.token}`
+            }
+        });
+        commit(TOKEN, response.data);
+        dispatch(PENDO_IDENTIFY);
     }
 };
 

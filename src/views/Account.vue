@@ -32,7 +32,8 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
+import { UPDATE } from '@/store/types/auth';
 
 export default {
     data() {
@@ -46,11 +47,40 @@ export default {
         }
     },
     computed: mapGetters(['username', 'role']),
+    mounted () {
+        this.prefillUserData();
+    },
     methods: {
+        ...mapActions({
+            editUser: UPDATE
+        }),
+        prefillUserData() {
+            this.formUsername = this.username;
+            this.formRole = this.role;
+            this.newPassword = "";
+            this.newPasswordRetype = "";
+            this.currentPassword = "";
+        },
         submit() {
-            if (this.validate()) {
-                alert("You're all good!");
+            if (!this.validate()) {
+                return;
             }
+            const body = {
+                currentPassword: this.currentPassword,
+                userInfo: {
+                    username: this.formUsername,
+                    role: this.formRole,
+                    password: this.newPassword
+                }
+            };
+            this.editUser(body).then(() => {
+                this.prefillUserData();
+            }, err => {
+                let res = err.response;
+                if (res) {
+                    this.errors.push(`Server returned ${res.status}: ${res.data}`);
+                }
+            });
         },
         validate() {
             this.errors = [];
