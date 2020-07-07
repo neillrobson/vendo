@@ -1,41 +1,38 @@
 <template>
     <div id="app">
-        <div id="nav">
-            <router-link :to="{ name: 'Home' }">Home</router-link>
-            | <router-link :to="{ name: 'Todo Application' }">Todo List</router-link>
-            | <router-link :to="{ name: 'Account' }">My Account</router-link>
+        <div id="nav" class="p-8 text-center">
+            <router-link :to="{ name: 'Home' }" class="router-link">Home</router-link>
+            | <router-link :to="{ name: 'Todo Application' }" class="router-link">Todo List</router-link>
+            | <router-link :to="{ name: 'Account' }" class="router-link">My Account</router-link>
             <span v-if="!isLoggedIn">
-                | <router-link :to="{ name: 'Login' }">Log In</router-link>
+                | <router-link :to="{ name: 'Login' }" class="router-link">Log In</router-link>
             </span>
             <span v-if="isLoggedIn">
-                | <a @click="logOut">Log Out</a>
+                | <a @click="logOut" class="router-link">Log Out</a>
             </span>
         </div>
         <router-view />
     </div>
 </template>
 
-<style>
+<style lang="postcss">
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    color: #2c3e50;
+    @apply font-sans;
+    @apply antialiased;
+    @apply text-gray-800;
 }
 
-#nav {
-    text-align: center;
-    padding: 30px;
+#nav .router-link {
+    @apply font-bold;
+    @apply cursor-pointer;
 }
 
-#nav a {
-    font-weight: bold;
-    color: #2c3e50;
-    cursor: pointer;
-}
-
-#nav a.router-link-exact-active {
-    color: #42b983;
+#nav .router-link.router-link-exact-active {
+    @apply text-green-500;
 }
 </style>
 
