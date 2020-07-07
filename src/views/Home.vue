@@ -1,6 +1,6 @@
 <template>
-    <div class="ui text container">
-        <h1 class="ui header">Welcome to Vendo</h1>
+    <div class="container mx-auto">
+        <h1>Welcome to Vendo</h1>
         <p>
             Vendo is a programming sandbox that
             <a href="https://neillrobson.com">Neill</a> is using to learn about
@@ -49,3 +49,17 @@ export default {
     }
 };
 </script>
+
+<style lang="postcss" scoped>
+h1 {
+    @apply font-bold text-3xl;
+}
+
+h2 {
+    @apply font-bold text-2xl;
+}
+
+a {
+    @apply text-teal-600;
+}
+</style>
