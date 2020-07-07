@@ -4,7 +4,6 @@ import store from './store'
 import router from './router'
 import App from './App.vue'
 
-import 'semantic-ui-css/semantic.min.css'
 import './scripts/mock-backend'
 
 Axios.defaults.baseURL = process.env.BASE_URL
