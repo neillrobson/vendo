@@ -16,9 +16,7 @@
 </template>
 
 <style lang="postcss">
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import './style/main.css';
 
 #app {
     @apply font-sans;
