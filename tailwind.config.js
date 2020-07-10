@@ -6,6 +6,8 @@ module.exports = {
       'sans': ['Avenir', 'Helvetica', 'Arial', 'sans-serif']
     }
   },
-  variants: {},
+  variants: {
+    backgroundColor: ['responsive', 'hover', 'focus', 'active']
+  },
   plugins: [],
 }

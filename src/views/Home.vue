@@ -1,5 +1,5 @@
 <template>
-    <div class="container mx-auto">
+    <div class="container mx-auto px-6">
         <h1>Welcome to Vendo</h1>
         <p>
             Vendo is a programming sandbox that
@@ -15,12 +15,12 @@
             That said, have fun hacking around with abandon. Please break this site and
             <a href="https://github.com/neillrobson/vendo/issues">let me know about it</a>, so that I can learn and grow!
         </p>
-        <h2 class="ui header">Housekeeping</h2>
-        <div class="ui two column middle aligned grid">
-            <div class="column">
-                <button class="ui button" @click="resetUsers">Reset Users</button>
+        <h2>Housekeeping</h2>
+        <div class="grid grid-cols-2">
+            <div>
+                <button class="transition duration-100 focus:outline-none bg-gray-300 active:bg-gray-500 hover:bg-gray-400 rounded px-4 py-2 font-bold cursor-pointer" @click="resetUsers">Reset Users</button>
             </div>
-            <div class="column">
+            <div>
                 Clear current user data and add the user
                 <code>nerob</code> with password
                 <code>letmein</code>.
@@ -60,6 +60,14 @@ h2 {
 }
 
 a {
-    @apply text-teal-600;
+    @apply text-blue-600;
+}
+
+a:hover {
+    @apply text-blue-700;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    @apply mb-4;
 }
 </style>
