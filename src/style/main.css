@@ -29,7 +29,7 @@ label {
 }
 
 input {
-    @apply border rounded border-gray-400 w-full px-3 py-2 mb-3 text-sm;
+    @apply border rounded border-gray-400 w-full px-3 py-2 mb-3;
 }
 
 input:focus {
@@ -63,7 +63,11 @@ input:focus {
 }
 
 .button {
-    @apply py-2 text-sm border rounded cursor-pointer px-6;
+    @apply py-2 text-sm border rounded cursor-pointer px-6 transition duration-100;
+}
+
+.button:focus {
+    outline: none;
 }
 
 .button.icon {
@@ -77,6 +81,18 @@ input:focus {
 
 .button.attached {
     @apply rounded-t-none -m-px;
+}
+
+.button.primary {
+    @apply bg-gray-300 font-bold text-base;
+}
+
+.button.primary:hover {
+    @apply bg-gray-400;
+}
+
+.button.primary:active {
+    @apply bg-gray-500;
 }
 
 .button.red {

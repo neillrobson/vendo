@@ -18,7 +18,7 @@
         <h2>Housekeeping</h2>
         <div class="grid grid-cols-2 items-center">
             <div>
-                <button class="transition duration-100 focus:outline-none bg-gray-300 active:bg-gray-500 hover:bg-gray-400 rounded px-4 py-2 font-bold cursor-pointer" @click="resetUsers">Reset Users</button>
+                <button class="button primary" @click="resetUsers">Reset Users</button>
             </div>
             <div>
                 Clear current user data and add the user
