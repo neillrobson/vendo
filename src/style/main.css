@@ -39,7 +39,7 @@ input:focus {
 @tailwind components;
 
 .card {
-    @apply w-64 mx-auto my-4 border border-gray-400 shadow rounded;
+    @apply mx-auto my-4 border border-gray-400 shadow rounded;
 }
 
 .buttons {
