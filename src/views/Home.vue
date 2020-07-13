@@ -1,6 +1,6 @@
 <template>
-    <div class="ui text container">
-        <h1 class="ui header">Welcome to Vendo</h1>
+    <div class="container mx-auto px-6">
+        <h1>Welcome to Vendo</h1>
         <p>
             Vendo is a programming sandbox that
             <a href="https://neillrobson.com">Neill</a> is using to learn about
@@ -15,12 +15,12 @@
             That said, have fun hacking around with abandon. Please break this site and
             <a href="https://github.com/neillrobson/vendo/issues">let me know about it</a>, so that I can learn and grow!
         </p>
-        <h2 class="ui header">Housekeeping</h2>
-        <div class="ui two column middle aligned grid">
-            <div class="column">
-                <button class="ui button" @click="resetUsers">Reset Users</button>
+        <h2>Housekeeping</h2>
+        <div class="grid grid-cols-2 items-center">
+            <div>
+                <button class="button primary" @click="resetUsers">Reset Users</button>
             </div>
-            <div class="column">
+            <div>
                 Clear current user data and add the user
                 <code>nerob</code> with password
                 <code>letmein</code>.

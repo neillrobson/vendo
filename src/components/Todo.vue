@@ -1,31 +1,31 @@
 <template>
-    <div class="ui centered card">
-        <div class="content" v-show="!isEditing">
-            <div class="header">{{ todo.title }}</div>
-            <div class="meta">{{ todo.project }}</div>
-            <div class="ui divider"></div>
-            <div class="ui buttons basic icon">
-                <button :id="makeId('edit-todo')" class="ui button" @click="showForm">
-                    <i class="edit icon"></i>
+    <div class="card">
+        <div class="p-4" v-show="!isEditing">
+            <div class="font-bold text-lg my-1">{{ todo.title }}</div>
+            <div class="text-sm text-gray-600">{{ todo.project }}</div>
+            <div class="divider"></div>
+            <div class="buttons">
+                <button :id="makeId('edit-todo')" class="button icon" @click="showForm">
+                    <font-awesome-icon icon="edit" fixed-width />
                 </button>
-                <button :id="makeId('delete-todo')" class="ui button" @click="deleteTodo(todo)">
-                    <i class="trash icon"></i>
-                </button>
-            </div>
-        </div>
-        <div class="content" v-show="isEditing">
-            <div class="ui form">
-                <div class="field"><label :for="titleInputId">Title</label><input :id="titleInputId" type="text" v-model="todo.title"></div>
-                <div class="field"><label :for="projectInputId">Project</label><input :id="projectInputId" type="text" v-model="todo.project"></div>
-                <button :id="makeId('todo-edit-close')" class="ui basic blue button" @click="hideForm">
-                    Close
+                <button :id="makeId('delete-todo')" class="button icon" @click="deleteTodo(todo)">
+                    <font-awesome-icon icon="trash" fixed-width />
                 </button>
             </div>
         </div>
-        <div :id="makeId('todo-completed')" class="ui bottom attached basic button green" v-show="todo.done">
+        <div class="p-4" v-show="isEditing">
+            <label :for="titleInputId">Title</label>
+            <input :id="titleInputId" type="text" v-model="todo.title">
+            <label :for="projectInputId">Project</label>
+            <input :id="projectInputId" type="text" v-model="todo.project">
+            <button :id="makeId('todo-edit-close')" class="blue button" @click="hideForm">
+                Close
+            </button>
+        </div>
+        <div :id="makeId('todo-completed')" class="button attached green" v-show="todo.done">
             Completed
         </div>
-        <div :id="makeId('todo-complete')" class="ui bottom attached basic button red" v-show="!todo.done" v-on:click="completeTodo(todo)">
+        <div :id="makeId('todo-complete')" class="button attached red" v-show="!todo.done" v-on:click="completeTodo(todo)">
             Complete
         </div>
     </div>
@@ -33,8 +33,17 @@
 
 <script>
 import { COMPLETE_TODO, DELETE_TODO } from '@/store/types/todo'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faEdit, faTrash)
 
 export default {
+    components: {
+        FontAwesomeIcon
+    },
+
     props: ['todo'],
 
     data() {
