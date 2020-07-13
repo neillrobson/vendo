@@ -13,19 +13,23 @@
                 </button>
             </div>
         </div>
-        <div class="content" v-show="isEditing">
-            <div class="ui form">
-                <div class="field"><label :for="titleInputId">Title</label><input :id="titleInputId" type="text" v-model="todo.title"></div>
-                <div class="field"><label :for="projectInputId">Project</label><input :id="projectInputId" type="text" v-model="todo.project"></div>
-                <button :id="makeId('todo-edit-close')" class="ui basic blue button" @click="hideForm">
-                    Close
-                </button>
+        <div class="p-4" v-show="isEditing">
+            <div class="field">
+                <label :for="titleInputId">Title</label>
+                <input :id="titleInputId" type="text" v-model="todo.title">
             </div>
+            <div class="field">
+                <label :for="projectInputId">Project</label>
+                <input :id="projectInputId" type="text" v-model="todo.project">
+            </div>
+            <button :id="makeId('todo-edit-close')" class="blue button" @click="hideForm">
+                Close
+            </button>
         </div>
-        <div :id="makeId('todo-completed')" class="py-2 text-sm text-green-500 border border-green-500 rounded-b -m-px cursor-pointer" v-show="todo.done">
+        <div :id="makeId('todo-completed')" class="button attached green" v-show="todo.done">
             Completed
         </div>
-        <div :id="makeId('todo-complete')" class="py-2 text-sm text-red-600 border border-red-600 rounded-b -m-px cursor-pointer" v-show="!todo.done" v-on:click="completeTodo(todo)">
+        <div :id="makeId('todo-complete')" class="button attached red" v-show="!todo.done" v-on:click="completeTodo(todo)">
             Complete
         </div>
     </div>
@@ -84,3 +88,37 @@ export default {
     }
 }
 </script>
+
+<style lang="postcss" scoped>
+.button {
+    @apply py-2 text-sm border rounded cursor-pointer px-6;
+}
+
+.button.attached {
+    @apply rounded-t-none -m-px;
+}
+
+.button.red {
+    @apply text-red-600 border-red-600;
+}
+
+.button.green {
+    @apply text-green-500 border-green-500;
+}
+
+.button.blue {
+    @apply text-blue-500 border-blue-500;
+}
+
+label {
+    @apply block text-sm font-bold mb-2;
+}
+
+input {
+    @apply border rounded border-gray-400 w-full px-3 py-2 mb-3 text-sm;
+}
+
+input:focus {
+    @apply border-blue-400 outline-none;
+}
+</style>
