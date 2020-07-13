@@ -23,11 +23,6 @@ module.exports = {
             splitChunks: {
                 maxSize: 244000
             }
-        },
-        performance: {
-            assetFilter(filename) {
-                return !(/\.(map|svg|css)$/.test(filename));
-            }
         }
     },
     devServer: devServer()
