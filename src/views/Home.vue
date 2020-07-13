@@ -16,7 +16,7 @@
             <a href="https://github.com/neillrobson/vendo/issues">let me know about it</a>, so that I can learn and grow!
         </p>
         <h2>Housekeeping</h2>
-        <div class="grid grid-cols-2">
+        <div class="grid grid-cols-2 items-center">
             <div>
                 <button class="transition duration-100 focus:outline-none bg-gray-300 active:bg-gray-500 hover:bg-gray-400 rounded px-4 py-2 font-bold cursor-pointer" @click="resetUsers">Reset Users</button>
             </div>
@@ -49,25 +49,3 @@ export default {
     }
 };
 </script>
-
-<style lang="postcss" scoped>
-h1 {
-    @apply font-bold text-3xl;
-}
-
-h2 {
-    @apply font-bold text-2xl;
-}
-
-a {
-    @apply text-blue-600;
-}
-
-a:hover {
-    @apply text-blue-700;
-}
-
-h1, h2, h3, h4, h5, h6, p {
-    @apply mb-4;
-}
-</style>

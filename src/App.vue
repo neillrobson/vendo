@@ -15,21 +15,15 @@
     </div>
 </template>
 
-<style lang="postcss">
+<style lang="postcss" scoped>
 @import './style/main.css';
 
-#app {
-    @apply font-sans;
-    @apply antialiased;
-    @apply text-gray-800;
+.router-link {
+    @apply font-bold cursor-pointer;
+    color: inherit;
 }
 
-#nav .router-link {
-    @apply font-bold;
-    @apply cursor-pointer;
-}
-
-#nav .router-link.router-link-exact-active {
+.router-link-exact-active {
     @apply text-green-500;
 }
 </style>
