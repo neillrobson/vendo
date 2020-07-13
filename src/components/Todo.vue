@@ -1,9 +1,9 @@
 <template>
-    <div class="ui centered card">
-        <div class="content" v-show="!isEditing">
-            <div class="header">{{ todo.title }}</div>
-            <div class="meta">{{ todo.project }}</div>
-            <div class="ui divider"></div>
+    <div class="w-64 mx-auto my-4 shadow-card rounded">
+        <div class="p-4" v-show="!isEditing">
+            <div class="font-bold text-lg my-1">{{ todo.title }}</div>
+            <div class="text-sm text-gray-600">{{ todo.project }}</div>
+            <div class="border-t border-gray-400 my-4"></div>
             <div class="ui buttons basic icon">
                 <button :id="makeId('edit-todo')" class="ui button" @click="showForm">
                     <i class="edit icon"></i>
