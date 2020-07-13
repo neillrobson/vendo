@@ -24,6 +24,75 @@ a:hover {
     @apply text-blue-700;
 }
 
+label {
+    @apply block text-sm font-bold mb-2;
+}
+
+input {
+    @apply border rounded border-gray-400 w-full px-3 py-2 mb-3 text-sm;
+}
+
+input:focus {
+    @apply border-blue-400 outline-none;
+}
+
 @tailwind components;
+
+.card {
+    @apply w-64 mx-auto my-4 border border-gray-400 shadow rounded;
+}
+
+.buttons {
+    @apply border rounded inline-flex;
+}
+
+.buttons .button {
+    @apply rounded-none -m-px;
+}
+
+.buttons .button:first-child {
+    @apply rounded-l;
+}
+
+.buttons .button:not(:last-child) {
+    @apply mr-0;
+}
+
+.buttons .button:last-child {
+    @apply rounded-r;
+}
+
+.button {
+    @apply py-2 text-sm border rounded cursor-pointer px-6;
+}
+
+.button.icon {
+    @apply p-2 leading-none;
+    fill-opacity: 0.75;
+}
+
+.button.icon:hover {
+    fill-opacity: 1;
+}
+
+.button.attached {
+    @apply rounded-t-none -m-px;
+}
+
+.button.red {
+    @apply text-red-600 border-red-600;
+}
+
+.button.green {
+    @apply text-green-500 border-green-500;
+}
+
+.button.blue {
+    @apply text-blue-500 border-blue-500;
+}
+
+.divider {
+    @apply border-t border-gray-400 my-4;
+}
 
 @tailwind utilities;
