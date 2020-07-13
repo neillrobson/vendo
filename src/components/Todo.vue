@@ -1,15 +1,15 @@
 <template>
-    <div class="w-64 mx-auto my-4 shadow-card rounded">
+    <div class="w-64 mx-auto my-4 border border-gray-400 shadow rounded">
         <div class="p-4" v-show="!isEditing">
             <div class="font-bold text-lg my-1">{{ todo.title }}</div>
             <div class="text-sm text-gray-600">{{ todo.project }}</div>
             <div class="border-t border-gray-400 my-4"></div>
-            <div class="ui buttons basic icon">
-                <button :id="makeId('edit-todo')" class="ui button" @click="showForm">
-                    <i class="edit icon"></i>
+            <div class="border border-gray-400 rounded inline-flex">
+                <button :id="makeId('edit-todo')" class="p-2 text-sm opacity-75 hover:opacity-100" @click="showForm">
+                    <font-awesome-icon icon="edit" fixed-width />
                 </button>
-                <button :id="makeId('delete-todo')" class="ui button" @click="deleteTodo(todo)">
-                    <i class="trash icon"></i>
+                <button :id="makeId('delete-todo')" class="p-2 text-sm opacity-75 hover:opacity-100 border-l border-gray-400" @click="deleteTodo(todo)">
+                    <font-awesome-icon icon="trash" fixed-width />
                 </button>
             </div>
         </div>
@@ -22,10 +22,10 @@
                 </button>
             </div>
         </div>
-        <div :id="makeId('todo-completed')" class="ui bottom attached basic button green" v-show="todo.done">
+        <div :id="makeId('todo-completed')" class="py-2 text-sm text-green-500 border border-green-500 rounded-b -m-px cursor-pointer" v-show="todo.done">
             Completed
         </div>
-        <div :id="makeId('todo-complete')" class="ui bottom attached basic button red" v-show="!todo.done" v-on:click="completeTodo(todo)">
+        <div :id="makeId('todo-complete')" class="py-2 text-sm text-red-600 border border-red-600 rounded-b -m-px cursor-pointer" v-show="!todo.done" v-on:click="completeTodo(todo)">
             Complete
         </div>
     </div>
@@ -33,8 +33,17 @@
 
 <script>
 import { COMPLETE_TODO, DELETE_TODO } from '@/store/types/todo'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faEdit, faTrash)
 
 export default {
+    components: {
+        FontAwesomeIcon
+    },
+
     props: ['todo'],
 
     data() {
