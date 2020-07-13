@@ -1,5 +1,5 @@
 import Axios from 'axios'
-import jwt from 'jsonwebtoken'
+import jwtDecode from 'jwt-decode'
 import {
     AUTH_ERROR,
     AUTH_LOADING,
@@ -16,6 +16,13 @@ import {
 } from '../types/auth'
 import pendoIdentify from "@/scripts/pendo";
 
+Axios.interceptors.request.use(async config => {
+    // Fetch the mock backend chunk from the server. It's big, so we don't want
+    // to get it on the initial page load.
+    await import(/* webpackChunkName: "mock-backend" */ '@/scripts/mock-backend');
+    return config;
+});
+
 const state = {
     status: '',
     token: localStorage.getItem('token') || null
@@ -25,7 +32,7 @@ const getters = {
     isLoggedIn: (state) => state.token != null,
     userData: (state, getters) => {
         if (!getters.isLoggedIn) return {};
-        return jwt.decode(state.token);
+        return jwtDecode(state.token);
     },
     username: (_state, getters) => {
         return getters.userData.username;
