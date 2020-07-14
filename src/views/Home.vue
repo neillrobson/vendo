@@ -30,14 +30,14 @@
 </template>
 
 <script>
-import { LOCAL_STORAGE_KEY } from '@/scripts/mock-backend.js'
-import bcrypt from 'bcryptjs'
+import { LOCAL_STORAGE_KEY } from '@/scripts/mock-backend.js';
+import bcrypt from 'bcryptjs';
 
 const DEFAULT_USERS = {
     nerob: {
-        username: "nerob",
-        password: bcrypt.hashSync("letmein", 10),
-        role: "user"
+        username: 'nerob',
+        password: bcrypt.hashSync('letmein', 10),
+        role: 'user'
     }
 };
 

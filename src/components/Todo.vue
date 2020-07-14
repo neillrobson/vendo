@@ -32,12 +32,12 @@
 </template>
 
 <script>
-import { COMPLETE_TODO, DELETE_TODO } from '@/store/types/todo'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { COMPLETE_TODO, DELETE_TODO } from '@/store/types/todo';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faEdit, faTrash)
+library.add(faEdit, faTrash);
 
 export default {
     components: {
@@ -82,5 +82,5 @@ export default {
             this.$store.dispatch(COMPLETE_TODO, todo);
         }
     }
-}
+};
 </script>

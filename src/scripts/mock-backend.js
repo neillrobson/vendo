@@ -1,15 +1,17 @@
-import Axios from 'axios'
-import MockAdapter from 'axios-mock-adapter'
-import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken'
+import Axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+
+/* eslint-disable no-throw-literal */
 
 var mock = new MockAdapter(Axios);
 
-export const LOCAL_STORAGE_KEY = "users";
+export const LOCAL_STORAGE_KEY = 'users';
 
 // This is obviously insecure. Never, ever pass the JWT secret to the frontend.
 // We're only doing it in this case to create a mock backend for the demo app.
-const SECRET = "secret";
+const SECRET = 'secret';
 const ROUNDS = 10;
 
 class UserStorage {
@@ -18,7 +20,7 @@ class UserStorage {
     }
 
     get users() {
-        let local = localStorage.getItem(this.key);
+        const local = localStorage.getItem(this.key);
         return local ? JSON.parse(local) : {};
     }
 
@@ -29,7 +31,7 @@ class UserStorage {
     createUser(data) {
         const users = this.users;
         if (users[data.username]) {
-            throw "Username already exists";
+            throw 'Username already exists';
         }
         users[data.username] = data;
         this.users = users;
@@ -72,22 +74,22 @@ function getTokenForUser(user) {
 function verifyAuthHeader(auth) {
     const BEARER_PREFIX = 'Bearer ';
     if (!auth) {
-        throw "No authorization header given";
+        throw 'No authorization header given';
     }
     if (!auth.startsWith(BEARER_PREFIX)) {
-        throw "Authorization header does not follow \"Bearer\" scheme";
+        throw 'Authorization header does not follow "Bearer" scheme';
     }
-    let token = auth.substring(BEARER_PREFIX.length);
+    const token = auth.substring(BEARER_PREFIX.length);
     let payload;
     try {
         payload = jwt.verify(token, SECRET);
     } catch (error) {
-        throw "Invalid JWT";
+        throw 'Invalid JWT';
     }
-    let currentUsername = payload.username;
-    let user = userStorage.readUser(currentUsername);
+    const currentUsername = payload.username;
+    const user = userStorage.readUser(currentUsername);
     if (!user) {
-        throw "Invalid JWT";
+        throw 'Invalid JWT';
     }
     return user;
 }
@@ -96,20 +98,20 @@ mock.onPost('/login').reply(config => {
     let username;
     let password;
     try {
-        let data = JSON.parse(config.data);
+        const data = JSON.parse(config.data);
         ({ username, password } = data);
     } catch (error) {
         return [400];
     }
-    let user = userStorage.readUser(username);
+    const user = userStorage.readUser(username);
     if (!user) {
-        return [401, "Unrecognized username"];
+        return [401, 'Unrecognized username'];
     }
     return bcrypt.compare(password, user.password).then(match => {
         if (match) {
             return [200, getTokenForUser(user)];
         } else {
-            return [401, "Incorrect password"];
+            return [401, 'Incorrect password'];
         }
     });
 });
@@ -117,15 +119,15 @@ mock.onPost('/login').reply(config => {
 mock.onPost('/register').reply(async config => {
     let username, role, rawPassword;
     try {
-        let data = JSON.parse(config.data);
+        const data = JSON.parse(config.data);
         ({ username, role, password: rawPassword } = data);
         if (!username || !role || !rawPassword) {
-            throw "Missing required field";
+            throw 'Missing required field';
         }
     } catch (error) {
         return [400];
     }
-    let password = await bcrypt.hash(rawPassword, ROUNDS);
+    const password = await bcrypt.hash(rawPassword, ROUNDS);
     try {
         userStorage.createUser({ username, role, password });
     } catch (error) {
@@ -147,7 +149,7 @@ mock.onPost('/register').reply(async config => {
  *     }
  * }
  */
-mock.onPut("/edit").reply(async config => {
+mock.onPut('/edit').reply(async config => {
     // ### Authorization ###
     let user;
     try {
@@ -159,22 +161,22 @@ mock.onPut("/edit").reply(async config => {
     try {
         data = JSON.parse(config.data);
     } catch (error) {
-        return [400, "Could not parse request body as JSON"];
+        return [400, 'Could not parse request body as JSON'];
     }
-    let currentRawPassword = data.currentPassword;
+    const currentRawPassword = data.currentPassword;
     if (!currentRawPassword || !await bcrypt.compare(currentRawPassword, user.password)) {
-        return [401, "Incorrect password"];
+        return [401, 'Incorrect password'];
     }
 
     // ### Data Initialization ###
-    let userInfo = data.userInfo;
-    if (!userInfo || typeof userInfo !== "object") {
-        return [400, "Could not parse user information from request body"];
+    const userInfo = data.userInfo;
+    if (!userInfo || typeof userInfo !== 'object') {
+        return [400, 'Could not parse user information from request body'];
     }
-    let newUsername = userInfo.username;
-    let newRole = userInfo.role;
-    let newRawPassword = userInfo.password;
-    let oldUsername = user.username;
+    const newUsername = userInfo.username;
+    const newRole = userInfo.role;
+    const newRawPassword = userInfo.password;
+    const oldUsername = user.username;
 
     // ### User Modification ###
     if (newUsername && newUsername !== oldUsername) {

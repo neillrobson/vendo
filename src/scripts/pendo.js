@@ -1,3 +1,4 @@
+/* eslint-disable */
 (function (apiKey) {
     (function (p, e, n, d, o) {
         var v, w, x, y, z; o = p[d] = p[d] || {}; o._q = [];
@@ -8,10 +9,11 @@
         z = e.getElementsByTagName(n)[0]; z.parentNode.insertBefore(y, z);
     })(window, document, 'script', 'pendo');
 })('697ae132-66e8-47f4-6858-96da721a7d3c');
+/* eslint-enable */
 
 export default function (userData) {
-    let p = window.pendo;
-    if ("function" === typeof p.isReady && p.isReady()) {
+    const p = window.pendo;
+    if (typeof p.isReady === 'function' && p.isReady()) {
         p.identify(userData);
     } else {
         p.initialize(userData);

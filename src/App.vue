@@ -29,7 +29,7 @@
 </style>
 
 <script>
-import { LOGOUT, PENDO_IDENTIFY } from "./store/types/auth";
+import { LOGOUT, PENDO_IDENTIFY } from './store/types/auth';
 import { mapGetters, mapState, mapActions } from 'vuex';
 
 export default {

@@ -5,7 +5,7 @@ import {
     DELETE_TODO,
     DELETE_TODO_INDEX,
     ADD_TODO
-} from '../types/todo'
+} from '../types/todo';
 
 export default {
     state: {
@@ -60,4 +60,4 @@ export default {
             context.commit(COMPLETE_TODO_INDEX, i);
         }
     }
-}
+};

@@ -6,14 +6,14 @@ module.exports = {
     pluginOptions: {
         webpackBundleAnalyzer: {
             openAnalyzer: false,
-            analyzerMode: "disabled"
+            analyzerMode: 'disabled'
         }
     },
     chainWebpack: config => {
         config
             .plugin('html')
             .tap(args => {
-                args[0].title = "Vendo";
+                args[0].title = 'Vendo';
                 return args;
             });
     },
@@ -26,7 +26,7 @@ module.exports = {
         }
     },
     devServer: devServer()
-}
+};
 
 function devServer() {
     const config = {

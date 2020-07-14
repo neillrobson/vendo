@@ -57,13 +57,13 @@
 </style>
 
 <script>
-import { mapState } from 'vuex'
-import { LOGIN, STATUS_SUCCESS, STATUS_LOADING, STATUS_ERROR } from '@/store/types/auth'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUser, faLock } from '@fortawesome/free-solid-svg-icons'
+import { mapState } from 'vuex';
+import { LOGIN, STATUS_SUCCESS, STATUS_LOADING, STATUS_ERROR } from '@/store/types/auth';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faUser, faLock)
+library.add(faUser, faLock);
 
 export default {
     components: {
@@ -72,21 +72,21 @@ export default {
 
     data() {
         return {
-            username: "",
-            password: "",
+            username: '',
+            password: '',
             STATUS_SUCCESS,
             STATUS_LOADING,
             STATUS_ERROR
-        }
+        };
     },
     computed: mapState({
         authStatus: state => state.auth.status
     }),
     methods: {
         handleSubmit() {
-            let username = this.username,
-                password = this.password;
-            this.$store.dispatch(LOGIN, {username, password}).then(() => {
+            const username = this.username;
+            const password = this.password;
+            this.$store.dispatch(LOGIN, { username, password }).then(() => {
                 if (this.$route.params.nextUrl != null) {
                     this.$router.push(this.$route.params.nextUrl);
                 } else {
@@ -95,5 +95,5 @@ export default {
             }, () => {});
         }
     }
-}
+};
 </script>

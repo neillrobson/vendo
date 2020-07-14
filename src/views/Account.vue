@@ -28,15 +28,15 @@ export default {
     data() {
         return {
             errors: [],
-            formUsername: "",
-            formRole: "",
-            newPassword: "",
-            newPasswordRetype: "",
-            currentPassword: ""
-        }
+            formUsername: '',
+            formRole: '',
+            newPassword: '',
+            newPasswordRetype: '',
+            currentPassword: ''
+        };
     },
     computed: mapGetters(['username', 'role']),
-    mounted () {
+    mounted() {
         this.prefillUserData();
     },
     methods: {
@@ -46,9 +46,9 @@ export default {
         prefillUserData() {
             this.formUsername = this.username;
             this.formRole = this.role;
-            this.newPassword = "";
-            this.newPasswordRetype = "";
-            this.currentPassword = "";
+            this.newPassword = '';
+            this.newPasswordRetype = '';
+            this.currentPassword = '';
         },
         submit() {
             if (!this.validate()) {
@@ -65,7 +65,7 @@ export default {
             this.editUser(body).then(() => {
                 this.prefillUserData();
             }, err => {
-                let res = err.response;
+                const res = err.response;
                 if (res) {
                     this.errors.push(`Server returned ${res.status}: ${res.data}`);
                 }
@@ -74,11 +74,11 @@ export default {
         validate() {
             this.errors = [];
             if (this.newPassword !== this.newPasswordRetype) {
-                this.errors.push("Password fields do not match");
+                this.errors.push('Password fields do not match');
                 return false;
             }
             return true;
         }
     }
-}
+};
 </script>

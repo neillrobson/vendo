@@ -12,9 +12,9 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import Todo from "./Todo"
-import CreateTodo from "./CreateTodo"
+import { mapState } from 'vuex';
+import Todo from './Todo';
+import CreateTodo from './CreateTodo';
 
 export default {
     computed: {
@@ -35,5 +35,5 @@ export default {
         Todo,
         CreateTodo
     }
-}
+};
 </script>

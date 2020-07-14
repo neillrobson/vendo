@@ -1,5 +1,5 @@
-import Axios from 'axios'
-import jwtDecode from 'jwt-decode'
+import Axios from 'axios';
+import jwtDecode from 'jwt-decode';
 import {
     AUTH_ERROR,
     AUTH_LOADING,
@@ -13,8 +13,8 @@ import {
     STATUS_ERROR,
     STATUS_LOADING,
     PENDO_IDENTIFY
-} from '../types/auth'
-import pendoIdentify from "@/scripts/pendo";
+} from '../types/auth';
+import pendoIdentify from '@/scripts/pendo';
 
 Axios.interceptors.request.use(async config => {
     // Fetch the mock backend chunk from the server. It's big, so we don't want
@@ -48,16 +48,16 @@ const actions = {
             commit(TOKEN, null);
             commit(AUTH_LOADING);
             Axios.post('login', info)
-            .then(response => {
-                commit(TOKEN, response.data);
-                commit(AUTH_SUCCESS);
-                dispatch(PENDO_IDENTIFY);
-                resolve(response);
-            })
-            .catch(error => {
-                commit(AUTH_ERROR);
-                reject(error);
-            });
+                .then(response => {
+                    commit(TOKEN, response.data);
+                    commit(AUTH_SUCCESS);
+                    dispatch(PENDO_IDENTIFY);
+                    resolve(response);
+                })
+                .catch(error => {
+                    commit(AUTH_ERROR);
+                    reject(error);
+                });
         });
     },
     [LOGOUT]({ commit }) {
@@ -95,7 +95,7 @@ const mutations = {
         state.status = '';
     },
     [TOKEN](state, token) {
-        state.token = token ? token : null;
+        state.token = token || null;
         if (state.token) {
             localStorage.setItem('token', state.token);
         } else {
