@@ -57,9 +57,7 @@ export default {
         }
     },
     mounted() {
-        if (this.isLoggedIn) {
-            this.pendoIdentify();
-        }
+        this.pendoIdentify();
     }
 };
 </script>

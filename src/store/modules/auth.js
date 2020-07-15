@@ -68,7 +68,18 @@ const actions = {
         });
     },
     [PENDO_IDENTIFY]({ getters }) {
-        pendoIdentify({ visitor: { id: getters.username } });
+        if (getters.isLoggedIn) {
+            pendoIdentify({
+                visitor: {
+                    id: getters.username
+                },
+                account: {
+                    id: getters.role
+                }
+            });
+        } else {
+            pendoIdentify();
+        }
     },
     async [UPDATE]({ commit, dispatch, state }, info) {
         const response = await Axios.put('edit', info, {
