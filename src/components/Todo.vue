@@ -14,9 +14,9 @@
             </div>
         </div>
         <div class="p-4" v-show="isEditing">
-            <label :for="titleInputId">Title</label>
+            <label :id="`label-${titleInputId}`" :for="titleInputId">Title</label>
             <input :id="titleInputId" type="text" v-model="todo.title">
-            <label :for="projectInputId">Project</label>
+            <label :id="`label-${projectInputId}`" :for="projectInputId">Project</label>
             <input :id="projectInputId" type="text" v-model="todo.project">
             <button :id="makeId('todo-edit-close')" class="blue button" @click="hideForm">
                 Close

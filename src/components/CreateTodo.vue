@@ -5,9 +5,9 @@
         </button>
         <div class="card" v-show="isCreating">
             <div class="p-4">
-                <label for="new-todo-title">Title</label>
+                <label id="new-todo-title-label" for="new-todo-title">Title</label>
                 <input id="new-todo-title" type="text" v-model="titleText">
-                <label for="new-todo-project">Project</label>
+                <label id="new-todo-project-label" for="new-todo-project">Project</label>
                 <input id="new-todo-project" type="text" v-model="projectText">
             </div>
             <div class="divider m-0"></div>
