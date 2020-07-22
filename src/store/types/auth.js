@@ -10,6 +10,7 @@ export const LOGIN = 'Log in';
 export const LOGOUT = 'Log out';
 export const PENDO_IDENTIFY = 'Send user credentials to Pendo';
 export const UPDATE = "Update the currently logged-in user's data";
+export const REGISTER = 'Create a new user';
 
 // Statuses
 export const STATUS_SUCCESS = 'success';

@@ -30,6 +30,11 @@ const routes = [
         meta: {
             requiresAuth: true
         }
+    },
+    {
+        path: '/register',
+        name: 'Register',
+        component: () => import(/* webpackChunkName: "register" */ '../views/Register.vue')
     }
 ];
 

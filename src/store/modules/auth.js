@@ -12,7 +12,8 @@ import {
     STATUS_SUCCESS,
     STATUS_ERROR,
     STATUS_LOADING,
-    PENDO_IDENTIFY
+    PENDO_IDENTIFY,
+    REGISTER
 } from '../types/auth';
 import pendoIdentify from '@/scripts/pendo';
 
@@ -66,6 +67,10 @@ const actions = {
             commit(AUTH_UNSET);
             resolve();
         });
+    },
+    async [REGISTER](_, info) {
+        const response = await Axios.post('register', info);
+        return response.status;
     },
     [PENDO_IDENTIFY]({ getters }) {
         if (getters.isLoggedIn) {
