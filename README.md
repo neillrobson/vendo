@@ -1,4 +1,6 @@
-# hello-world
+# Vendo
+
+> In which Neill experiments with Vue and Pendo.
 
 ## Project setup
 ```
