@@ -1,25 +1,39 @@
 <template>
     <div>
-        <p>Completed Tasks: {{todos.filter(todo => todo.done === true).length}}</p>
-        <p>Current Tasks: {{todos.filter(todo => todo.done === false).length}}</p>
-        <div class="ui centered card" v-for="todo in todos" :key="todo.id">
-            <div class="content">
-                <div class="header">{{ todo.title }}</div>
-                <div class="meta">{{ todo.project }}</div>
-                <div class="extra content"></div>
-            </div>
-            <div class="button"></div>
-            <div class="button"></div>
-        </div>
+        <p>Completed Tasks: {{ completedCount }}</p>
+        <p>Current Tasks: {{ currentCount }}</p>
+        <Todo
+            v-for="todo in todos"
+            :todo="todo"
+            :key="todo.id"
+            />
+        <CreateTodo />
     </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+import Todo from './Todo';
+import CreateTodo from './CreateTodo';
+
 export default {
-    props: ["todos"]
-}
+    computed: {
+        ...mapState({
+            todos: state => state.todo.todos
+        }),
+
+        completedCount() {
+            return this.todos.filter(todo => todo.done).length;
+        },
+
+        currentCount() {
+            return this.todos.filter(todo => !todo.done).length;
+        }
+    },
+
+    components: {
+        Todo,
+        CreateTodo
+    }
+};
 </script>
-
-<style>
-
-</style>

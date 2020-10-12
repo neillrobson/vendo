@@ -1,53 +1,64 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <TodoList :todos="todos" />
-  </div>
+    <div id="app">
+        <div id="nav" class="p-8 text-center">
+            <router-link :to="{ name: 'Home' }" class="router-link">Home</router-link>
+            | <router-link :to="{ name: 'Todo Application' }" class="router-link">Todo List</router-link>
+            | <router-link :to="{ name: 'Account' }" class="router-link">My Account</router-link>
+            | <router-link :to="{ name: 'Register' }" class="router-link">Register</router-link>
+            <span v-if="!isLoggedIn">
+                | <router-link :to="{ name: 'Login' }" class="router-link">Log In</router-link>
+            </span>
+            <span v-if="isLoggedIn">
+                | <a @click="logOut" class="router-link">Log Out</a>
+            </span>
+        </div>
+        <router-view />
+    </div>
 </template>
 
-<script>
-import TodoList from "./components/TodoList.vue"
+<style lang="postcss" scoped>
+@import './style/main.css';
 
-export default {
-  name: 'App',
-  components: {
-    TodoList
-  },
-  data() {
-    return {
-      todos: [{
-        id: 1,
-        title: 'Todo A',
-        project: 'Project A',
-        done: false
-      }, {
-        id: 2,
-        title: 'Todo B',
-        project: 'Project B',
-        done: true
-      }, {
-        id: 3,
-        title: 'Todo C',
-        project: 'Project C',
-        done: false
-      }, {
-        id: 4,
-        title: 'Todo D',
-        project: 'Project D',
-        done: false
-      }]
-    }
-  }
+.router-link {
+    @apply font-bold cursor-pointer;
+    color: inherit;
 }
-</script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.router-link-exact-active {
+    @apply text-green-500;
 }
 </style>
+
+<script>
+import { LOGOUT, PENDO_IDENTIFY } from './store/types/auth';
+import { mapGetters, mapState, mapActions } from 'vuex';
+
+export default {
+    computed: {
+        ...mapState({
+            token: state => state.auth.token
+        }),
+        ...mapGetters([
+            'isLoggedIn'
+        ])
+    },
+    methods: {
+        ...mapActions({
+            pendoIdentify: PENDO_IDENTIFY
+        }),
+        logOut() {
+            this.$store.dispatch(LOGOUT).then(() => {
+                if (this.$route.meta.requiresAuth) {
+                    this.$router.push({
+                        name: 'Login',
+                        params: { nextUrl: this.$route.fullPath }
+                    });
+                }
+            });
+        }
+    },
+    mounted() {
+        this.pendoIdentify();
+    }
+};
+</script>

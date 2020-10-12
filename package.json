@@ -1,27 +1,53 @@
 {
-  "name": "hello-world",
-  "version": "0.1.0",
+  "name": "vendo",
+  "version": "1.5.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "prebuild": "rimraf 'dist/**/!(.git)'",
     "build": "vue-cli-service build --no-clean",
-    "lint": "vue-cli-service lint"
+    "test:unit": "vue-cli-service test:unit",
+    "lint": "vue-cli-service lint",
+    "deploy": "cd dist && git add . && git commit -m \"v$npm_package_version\" && git push",
+    "postbuild": "cp dist/index.html dist/404.html",
+    "prebuild": "rimraf 'dist/**/!(.git)'",
+    "predeploy": "npm run build"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.29",
+    "@fortawesome/free-solid-svg-icons": "^5.13.1",
+    "@fortawesome/vue-fontawesome": "^0.1.10",
+    "axios": "^0.18.0",
+    "axios-mock-adapter": "^1.18.1",
+    "bcryptjs": "^2.4.3",
     "core-js": "^3.6.5",
-    "jquery": "^3.5.1",
-    "semantic-ui-css": "^2.4.1",
-    "vue": "^2.6.11"
+    "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^2.2.0",
+    "tailwindcss": "^1.4.6",
+    "vue": "^2.6.11",
+    "vue-router": "^3.2.0",
+    "vuex": "^3.4.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.4.0",
-    "@vue/cli-plugin-eslint": "~4.4.0",
-    "@vue/cli-service": "~4.4.0",
+    "@vue/cli-plugin-babel": "^4.4.5",
+    "@vue/cli-plugin-eslint": "^4.4.5",
+    "@vue/cli-plugin-router": "^4.4.5",
+    "@vue/cli-plugin-unit-jest": "^4.4.5",
+    "@vue/cli-plugin-vuex": "^4.4.5",
+    "@vue/cli-service": "^4.4.5",
+    "@vue/test-utils": "^1.0.3",
     "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
+    "cypress": "^4.8.0",
+    "eslint": "^7.4.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-cypress": "^2.11.1",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
     "eslint-plugin-vue": "^6.2.2",
     "rimraf": "^3.0.2",
+    "vue-cli-plugin-axios": "0.0.4",
+    "vue-cli-plugin-webpack-bundle-analyzer": "~2.0.0",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
@@ -36,7 +62,18 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "rules": {},
+    "overrides": [
+      {
+        "files": [
+          "**/__tests__/*.{j,t}s?(x)",
+          "**/tests/unit/**/*.spec.{j,t}s?(x)"
+        ],
+        "env": {
+          "jest": true
+        }
+      }
+    ]
   },
   "browserslist": [
     "> 1%",

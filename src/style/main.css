@@ -1,0 +1,114 @@
+@tailwind base;
+
+body {
+    @apply font-sans antialiased text-gray-800;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    @apply mb-4;
+}
+
+h1 {
+    @apply font-bold text-3xl;
+}
+
+h2 {
+    @apply font-bold text-2xl;
+}
+
+a {
+    @apply text-blue-600;
+}
+
+a:hover {
+    @apply text-blue-700;
+}
+
+label {
+    @apply block text-sm font-bold mb-2;
+}
+
+input {
+    @apply border rounded border-gray-400 w-full px-3 py-2 mb-3;
+}
+
+input:focus {
+    @apply border-blue-400 outline-none;
+}
+
+@tailwind components;
+
+.card {
+    @apply mx-auto my-4 border border-gray-400 shadow rounded;
+}
+
+.buttons {
+    @apply border rounded inline-flex;
+}
+
+.buttons .button {
+    @apply rounded-none -m-px;
+}
+
+.buttons .button:first-child {
+    @apply rounded-l;
+}
+
+.buttons .button:not(:last-child) {
+    @apply mr-0;
+}
+
+.buttons .button:last-child {
+    @apply rounded-r;
+}
+
+.button {
+    @apply py-2 text-sm border rounded cursor-pointer px-6 transition duration-100;
+}
+
+.button:focus {
+    outline: none;
+}
+
+.button.icon {
+    @apply p-2 leading-none;
+    fill-opacity: 0.75;
+}
+
+.button.icon:hover {
+    fill-opacity: 1;
+}
+
+.button.attached {
+    @apply rounded-t-none -m-px;
+}
+
+.button.primary {
+    @apply bg-gray-300 font-bold text-base;
+}
+
+.button.primary:hover {
+    @apply bg-gray-400;
+}
+
+.button.primary:active {
+    @apply bg-gray-500;
+}
+
+.button.red {
+    @apply text-red-600 border-red-600;
+}
+
+.button.green {
+    @apply text-green-500 border-green-500;
+}
+
+.button.blue {
+    @apply text-blue-500 border-blue-500;
+}
+
+.divider {
+    @apply border-t border-gray-400 my-4;
+}
+
+@tailwind utilities;
