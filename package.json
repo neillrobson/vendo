@@ -4,13 +4,10 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --no-clean",
+    "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "deploy": "cd dist && git add . && git commit -m \"v$npm_package_version\" && git push",
-    "postbuild": "cp dist/index.html dist/404.html",
-    "prebuild": "rimraf 'dist/**/!(.git)'",
-    "predeploy": "npm run build"
+    "postbuild": "cp dist/index.html dist/404.html"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
