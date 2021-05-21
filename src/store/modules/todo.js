@@ -4,8 +4,12 @@ import {
     CREATE_TODO,
     DELETE_TODO,
     DELETE_TODO_INDEX,
-    ADD_TODO
+    ADD_TODO,
+    EDIT_TODO_INDEX,
+    EDIT_TODO
 } from '../types/todo';
+
+import { pick } from 'lodash';
 
 export default {
     state: {
@@ -44,6 +48,9 @@ export default {
         },
         [COMPLETE_TODO_INDEX](state, index) {
             state.todos[index].done = true;
+        },
+        [EDIT_TODO_INDEX](state, index, todo) {
+            Object.assign(state.todos[index], pick(todo, 'title', 'project'));
         }
     },
     actions: {
@@ -58,6 +65,10 @@ export default {
         [COMPLETE_TODO](context, todo) {
             const i = context.getters.todoIndex(todo);
             context.commit(COMPLETE_TODO_INDEX, i);
+        },
+        [EDIT_TODO](context, todo) {
+            const i = context.getters.todoIndex(todo);
+            context.commit(EDIT_TODO_INDEX, i, todo);
         }
     }
 };
