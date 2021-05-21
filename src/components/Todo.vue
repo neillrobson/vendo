@@ -1,8 +1,8 @@
 <template>
     <div class="card">
         <div class="p-4" v-show="!isEditing">
-            <div class="font-bold text-lg my-1">{{ todo.title }}</div>
-            <div class="text-sm text-gray-600">{{ todo.project }}</div>
+            <div class="font-bold text-lg my-1">{{ title }}</div>
+            <div class="text-sm text-gray-600">{{ project }}</div>
             <div class="divider"></div>
             <div class="buttons">
                 <button :id="makeId('edit-todo')" class="button icon" @click="showForm">
@@ -15,9 +15,9 @@
         </div>
         <div class="p-4" v-show="isEditing">
             <label :id="`label-${titleInputId}`" :for="titleInputId">Title</label>
-            <input :id="titleInputId" type="text" v-model="todo.title">
+            <input :id="titleInputId" type="text" v-model="title">
             <label :id="`label-${projectInputId}`" :for="projectInputId">Project</label>
-            <input :id="projectInputId" type="text" v-model="todo.project">
+            <input :id="projectInputId" type="text" v-model="project">
             <button :id="makeId('todo-edit-close')" class="blue button" @click="hideForm">
                 Close
             </button>
@@ -48,7 +48,9 @@ export default {
 
     data() {
         return {
-            isEditing: false
+            isEditing: false,
+            title: this.todo.title,
+            project: this.todo.project
         };
     },
 
