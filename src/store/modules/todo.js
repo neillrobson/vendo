@@ -9,8 +9,6 @@ import {
     EDIT_TODO
 } from '../types/todo';
 
-import { pick } from 'lodash';
-
 export default {
     state: {
         todos: [{
@@ -36,7 +34,7 @@ export default {
         }]
     },
     getters: {
-        todoIndex: state => todo => state.todos.indexOf(todo),
+        todoIndex: state => id => state.todos.map(todo => todo.id).indexOf(id),
         newTodoId: state => state.todos.map(todo => todo.id).reduce((a, b) => Math.max(a, b), 0) + 1
     },
     mutations: {
@@ -49,26 +47,27 @@ export default {
         [COMPLETE_TODO_INDEX](state, index) {
             state.todos[index].done = true;
         },
-        [EDIT_TODO_INDEX](state, index, todo) {
-            Object.assign(state.todos[index], pick(todo, 'title', 'project'));
+        [EDIT_TODO_INDEX](state, { index, todo }) {
+            state.todos[index].title = todo.title;
+            state.todos[index].project = todo.project;
         }
     },
     actions: {
-        [DELETE_TODO](context, todo) {
-            const i = context.getters.todoIndex(todo);
+        [DELETE_TODO](context, id) {
+            const i = context.getters.todoIndex(id);
             context.commit(DELETE_TODO_INDEX, i);
         },
         [CREATE_TODO](context, todo) {
             todo.id = context.getters.newTodoId;
             context.commit(ADD_TODO, todo);
         },
-        [COMPLETE_TODO](context, todo) {
-            const i = context.getters.todoIndex(todo);
+        [COMPLETE_TODO](context, id) {
+            const i = context.getters.todoIndex(id);
             context.commit(COMPLETE_TODO_INDEX, i);
         },
         [EDIT_TODO](context, todo) {
-            const i = context.getters.todoIndex(todo);
-            context.commit(EDIT_TODO_INDEX, i, todo);
+            const index = context.getters.todoIndex(todo.id);
+            context.commit(EDIT_TODO_INDEX, { index, todo });
         }
     }
 };

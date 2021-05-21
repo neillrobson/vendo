@@ -8,7 +8,7 @@
                 <button :id="makeId('edit-todo')" class="button icon" @click="showForm">
                     <font-awesome-icon icon="edit" fixed-width />
                 </button>
-                <button :id="makeId('delete-todo')" class="button icon" @click="deleteTodo(todo)">
+                <button :id="makeId('delete-todo')" class="button icon" @click="deleteTodo(todo.id)">
                     <font-awesome-icon icon="trash" fixed-width />
                 </button>
             </div>
@@ -25,14 +25,14 @@
         <div :id="makeId('todo-completed')" class="button attached green" v-show="todo.done">
             Completed
         </div>
-        <div :id="makeId('todo-complete')" class="button attached red" v-show="!todo.done" v-on:click="completeTodo(todo)">
+        <div :id="makeId('todo-complete')" class="button attached red" v-show="!todo.done" v-on:click="completeTodo(todo.id)">
             Complete
         </div>
     </div>
 </template>
 
 <script>
-import { COMPLETE_TODO, DELETE_TODO } from '@/store/types/todo';
+import { COMPLETE_TODO, DELETE_TODO, EDIT_TODO } from '@/store/types/todo';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -48,13 +48,27 @@ export default {
 
     data() {
         return {
-            isEditing: false,
-            title: this.todo.title,
-            project: this.todo.project
+            isEditing: false
         };
     },
 
     computed: {
+        title: {
+            get() {
+                return this.todo.title;
+            },
+            set(title) {
+                this.editTodo(Object.assign({}, this.todo, { title }));
+            }
+        },
+        project: {
+            get() {
+                return this.todo.project;
+            },
+            set(project) {
+                this.editTodo(Object.assign({}, this.todo, { project }));
+            }
+        },
         titleInputId() {
             return this.makeId('todo-title-input');
         },
@@ -76,12 +90,16 @@ export default {
             this.isEditing = false;
         },
 
-        deleteTodo(todo) {
-            this.$store.dispatch(DELETE_TODO, todo);
+        editTodo(todo) {
+            this.$store.dispatch(EDIT_TODO, todo);
         },
 
-        completeTodo(todo) {
-            this.$store.dispatch(COMPLETE_TODO, todo);
+        deleteTodo(id) {
+            this.$store.dispatch(DELETE_TODO, id);
+        },
+
+        completeTodo(id) {
+            this.$store.dispatch(COMPLETE_TODO, id);
         }
     }
 };
