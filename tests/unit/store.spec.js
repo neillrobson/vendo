@@ -15,12 +15,15 @@ test('only changes title and project properties when editing todo', () => {
             done: false
         }]
     };
-    mutations[EDIT_TODO_INDEX](state, 0, {
-        title: NEW_TITLE,
-        project: NEW_PROJECT,
-        id: 3,
-        done: true,
-        new_prop: 'cats'
+    mutations[EDIT_TODO_INDEX](state, {
+        index: 0,
+        todo: {
+            title: NEW_TITLE,
+            project: NEW_PROJECT,
+            id: 3,
+            done: true,
+            new_prop: 'cats'
+        }
     });
     expect(state.todos[0].title).toBe(NEW_TITLE);
     expect(state.todos[0].project).toBe(NEW_PROJECT);
