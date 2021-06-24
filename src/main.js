@@ -7,9 +7,10 @@ import App from './App.vue';
 Axios.defaults.baseURL = process.env.BASE_URL;
 
 const app = createApp({
-    store,
     router,
     ...App
 });
+
+app.use(store);
 
 app.mount('#app');
