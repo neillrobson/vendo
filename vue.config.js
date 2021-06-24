@@ -16,22 +16,6 @@ module.exports = {
                 args[0].title = 'Vendo';
                 return args;
             });
-
-        config.resolve.alias.set('vue', '@vue/compat');
-
-        config.module
-            .rule('vue')
-            .use('vue-loader')
-            .tap(options => {
-                return {
-                    ...options,
-                    compilerOptions: {
-                        compatConfig: {
-                            MODE: 2
-                        }
-                    }
-                };
-            });
     },
     configureWebpack: {
         devtool: 'source-map',
