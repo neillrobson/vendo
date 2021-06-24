@@ -1,4 +1,5 @@
 const fs = require('fs');
+const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 module.exports = {
     publicPath: '/vendo/',
@@ -23,7 +24,16 @@ module.exports = {
             splitChunks: {
                 maxSize: 244000
             }
-        }
+        },
+        resolve: {
+            fallback: {
+                crypto: require.resolve('crypto-browserify'),
+                stream: require.resolve('stream-browserify')
+            }
+        },
+        plugins: [
+            new NodePolyfillPlugin()
+        ]
     },
     devServer: devServer()
 };
