@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 
 /* eslint-disable no-throw-literal */
 
-var mock = new MockAdapter(Axios);
+const mock = new MockAdapter(Axios);
 
 export const LOCAL_STORAGE_KEY = 'users';
 
@@ -57,7 +57,7 @@ class UserStorage {
     }
 }
 
-var userStorage = new UserStorage(LOCAL_STORAGE_KEY);
+const userStorage = new UserStorage(LOCAL_STORAGE_KEY);
 
 function getTokenForUser(user) {
     return jwt.sign({
