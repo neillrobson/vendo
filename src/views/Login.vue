@@ -1,5 +1,5 @@
 <template>
-    <div class="container mx-auto px-6">
+    <div class="container">
         <img class="mx-auto" src="@/assets/logo.png" alt="Vue logo">
         <form @submit.prevent="handleSubmit">
             <div class="message" v-if="authStatus === STATUS_LOADING">

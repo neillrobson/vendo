@@ -1,5 +1,5 @@
 <template>
-    <div class="container mx-auto px-6">
+    <div class="container">
         <h1>Welcome to Vendo</h1>
         <p>
             Vendo is a programming sandbox that

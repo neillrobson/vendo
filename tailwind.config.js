@@ -3,9 +3,12 @@ module.exports = {
         './src/**/*.vue'
     ],
     theme: {
-        extend: {},
         fontFamily: {
             sans: ['Avenir', 'Helvetica', 'Arial', 'sans-serif']
+        },
+        container: {
+            center: true,
+            padding: '2rem'
         }
     },
     variants: {

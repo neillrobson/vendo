@@ -1,5 +1,5 @@
 <template>
-    <div class="container mx-auto px-6">
+    <div class="container">
         <h1>Create an Account</h1>
         <p v-if="errors.length">
             <strong>Please correct the following error(s):</strong>
