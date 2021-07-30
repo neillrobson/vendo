@@ -3,6 +3,7 @@
         <div id="nav" class="p-8 text-center">
             <router-link :to="{ name: 'Home' }" class="router-link">Home</router-link>
             | <router-link :to="{ name: 'Todo Application' }" class="router-link">Todo List</router-link>
+            | <router-link :to="{ name: 'Timezone Converter' }" class="router-link">Timezone Converter</router-link>
             | <router-link :to="{ name: 'Account' }" class="router-link">My Account</router-link>
             | <router-link :to="{ name: 'Register' }" class="router-link">Register</router-link>
             <span v-if="!isLoggedIn">

@@ -32,6 +32,11 @@ const routes = [
         path: '/register',
         name: 'Register',
         component: () => import(/* webpackChunkName: "register" */ '../views/Register.vue')
+    },
+    {
+        path: '/timezone',
+        name: 'Timezone Converter',
+        component: () => import('../views/Timezone.vue')
     }
 ];
 
