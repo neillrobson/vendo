@@ -1,5 +1,3 @@
-/// <reference types="cypress" />
-
 const USERNAME = 'neill'
 const BAD_PASSWORD = 'badpass'
 
