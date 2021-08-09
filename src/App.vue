@@ -11,6 +11,7 @@
             </span>
             <span v-if="isLoggedIn">
                 | <a @click="logOut" class="router-link">Log Out</a>
+                | <span class="user">{{ username }}</span> <span class="account">{{ role }}</span>
             </span>
         </div>
         <router-view />
@@ -40,7 +41,9 @@ export default {
             token: state => state.auth.token
         }),
         ...mapGetters([
-            'isLoggedIn'
+            'isLoggedIn',
+            'username',
+            'role'
         ])
     },
     methods: {

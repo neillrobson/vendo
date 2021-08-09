@@ -1,0 +1,190 @@
+/* COLOUR SCHEMES!! */
+
+/* Fig Default */
+.FIG{ color:#332a28; }
+.FIG.box{ background:#8b726d; border-color:#332a28; }
+.FIG.box.link:hover{ background:#a68a85; }
+.FIG.lightext{ color:#8b726d; border-color:#8b726d; }
+
+/* Pseudolonewolf's Special Cyan */
+.CYN{ color:#234; }
+.CYN.box{ background:#3ad; border-color:#234; }
+.CYN.box.link:hover{ background:#38bcf5; }
+.CYN.lightext{ color:#3ad; border-color:#3ad; }
+
+/* Firequill's Special Gold */
+.FQL{ color:#954; }
+.FQL.box{ background:#fc7; border-color:#c96; }
+.FQL.box.link:hover{ background:#fd8; }
+.FQL.lightext{ color:#fc7; border-color:#fc7; }
+
+/* Green */
+.GRN{ color:#2c542f; }
+.GRN.box{ background:#57a75e; border-color:#2c542f; }
+.GRN.box.link:hover{ background:#6acc72; }
+.GRN.lightext{ color:#57a75e; border-color:#57a75e; }
+
+/* Blue */
+.BLU{ color:#222745; }
+.BLU.box{ background:#6271c9; border-color:#222745; }
+.BLU.box.link:hover{ background:#6b7cdb; }
+.BLU.lightext{ color:#6271c9; border-color:#6271c9; }
+
+/* Red */
+.RED{ color:#59362f; }
+.RED.box{ background:#c67868; border-color:#59362f; }
+.RED.box.link:hover{ background:#de8776; }
+.RED.lightext{ color:#c67868; border-color:#c67868; }
+
+/* Orange */
+.ORG{ color:#4d2f1d; } /*f95*/
+.ORG.box{ background:#de8a54; border-color:#4d2f1d; } /*7f4710*/
+.ORG.box.link:hover{ background:#f2965c; } /*884f12*/
+.ORG.lightext{ color:#de8a54; border-color:#de8a54; }
+
+/* Purple */
+.PPL{ color:#382b4d; }
+.PPL.box{ background:#9672cd; border-color:#382b4d; }
+.PPL.box.link:hover{ background:#a37cde; }
+.PPL.lightext{ color:#9672cd; border-color:#9672cd; }
+
+/* Pink */
+.PNK{ color:#634559; }
+.PNK.box{ background:#de99c6; border-color:#634559; }
+.PNK.box.link:hover{ background:#f5a9da; }
+.PNK.lightext{ color:#de99c6; border-color:#de99c6; }
+
+/* Beige */
+.BEG{ color:#4d4036; }
+.BEG.box{ background:#c2a388; border-color:#4d4036; }
+.BEG.box.link:hover{ background:#d4b294; }
+.BEG.lightext{ color:#c2a388; border-color:#c2a388; }
+
+/* Sky Blue */
+.SKY{ color:#2b4f5c; }
+.SKY.box{ background:#64b6d5; border-color:#2b4f5c; }
+.SKY.box.link:hover{ background:#72d0f2; }
+.SKY.lightext{ color:#64b6d5; border-color:#64b6d5; }
+
+/* Grey */
+.GRY{ color:#3d3938; }
+.GRY.box{ background:#948a88; border-color:#3d3938; }
+.GRY.box.link:hover{ background:#b5a9a7; }
+.GRY.lightext{ color:#948a88; border-color:#948a88; }
+
+/* Black */
+.BLK{ color:#9e827d; }
+.BLK.box{ background:#3d3230; border-color:#000; }
+.BLK.box.link:hover{ background:#544542; }
+.BLK.lightext{ color:#9e827d; border-color:#9e827d; }
+
+/* White */
+.WHT{ color:#756d6c; } /*color:#333; }*/
+.WHT.box{ background:#eededb; border-color:#756d6c; }
+.WHT.box.link:hover{ background:#fff; }
+.WHT.lightext{ color:#eededb; border-color:#eededb; }
+
+/* Yellow */
+.YLW{ color:#634e2c; }
+.YLW.box{ background:#eab767; border-color:#634e2c; }
+.YLW.box.link:hover{ background:#ffc870; }
+.YLW.lightext{ color:#eab767; border-color:#eab767; }
+
+/* Deep Green */
+.DGN{ color:#1b331d; }
+.DGN.box{ background:#417a47; border-color:#1b331d; }
+.DGN.box.link:hover{ background:#4a8c51; }
+.DGN.lightext{ color:#417a47; border-color:#417a47; }
+
+/* Lime Green */
+.LIM{ color:#4d5432; }
+.LIM.box{ background:#b0bf73; border-color:#4d5432; }
+.LIM.box.link:hover{ background:#c0d17d; }
+.LIM.lightext{ color:#b0bf73; border-color:#b0bf73; }
+
+/* Teal */
+.TEL{ color:#25524f; }
+.TEL.box{ background:#5dcfc9; border-color:#25524f; }
+.TEL.box.link:hover{ background:#67e5df; }
+.TEL.lightext{ color:#5dcfc9; border-color:#5dcfc9; }
+
+/* Mint */
+.MNT{ color:#30594a; }
+.MNT.box{ background:#6ecca8; border-color:#30594a; }
+.MNT.box.link:hover{ background:#79e0b9; }
+.MNT.lightext{ color:#6ecca8; border-color:#6ecca8; }
+
+/* Cherry */
+.CHR{ color:#42252c; }
+.CHR.box{ background:#cb7188; border-color:#42252c; }
+.CHR.box.link:hover{ background:#e37f98; }
+.CHR.lightext{ color:#cb7188; border-color:#cb7188; }
+
+/* Scarlet */
+.SCR{ color:#592b20; }
+.SCR.box{ background:#d6664d; border-color:#592b20; }
+.SCR.box.link:hover{ background:#ed7155; }
+.SCR.lightext{ color:#d6664d; border-color:#d6664d; }
+
+/* Plum */
+.PLM{ color:#3e2742; }
+.PLM.box{ background:#975fa1; border-color:#3e2742; }
+.PLM.box.link:hover{ background:#af6eba; }
+.PLM.lightext{ color:#975fa1; border-color:#975fa1; }
+
+/* Deep Blue */
+.DPB{ color:#1b2e4a; }
+.DPB.box{ background:#5792eb; border-color:#1b2e4a; }
+.DPB.box.link:hover{ background:#5e9fff; }
+.DPB.lightext{ color:#5792eb; border-color:#5792eb; }
+
+/* Lavender */
+.LAV{ color:#464054; }
+.LAV.box{ background:#b3a4d8; border-color:#464054; }
+.LAV.box.link:hover{ background:#c9b8f2; }
+.LAV.lightext{ color:#b3a4d8; border-color:#b3a4d8; }
+
+/* Tea */
+.TEA{ color:#33281f; }
+.TEA.box{ background:#b18c6c; border-color:#33281f; }
+.TEA.box.link:hover{ background:#c29976; }
+.TEA.lightext{ color:#b18c6c; border-color:#b18c6c; }
+
+/* Dark Chocolate */
+.CHC{ color:#33251d; }
+.CHC.box{ background:#946b54; border-color:#33251d; }
+.CHC.box.link:hover{ background:#ad7e63; }
+.CHC.lightext{ color:#946b54; border-color:#946b54; }
+
+/* Gold */
+.GLD{ color:#4a3723; }
+.GLD.box{ background:#ca9660; border-color:#4a3723; }
+.GLD.box.link:hover{ background:#e0a86c; }
+.GLD.lightext{ color:#ca9660; border-color:#ca9660; }
+
+/* Forest Green */
+.FST{ color:#374225; }
+.FST.box{ background:#768f50; border-color:#374225; }
+.FST.box.link:hover{ background:#84a15a; }
+.FST.lightext{ color:#768f50; border-color:#768f50; }
+/*
+     FILE ARCHIVED ON 03:29:31 May 31, 2014 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 18:29:32 Aug 06, 2021.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  captures_list: 282.562
+  exclusion.robots: 0.137
+  exclusion.robots.policy: 0.126
+  RedisCDXSource: 5.071
+  esindex: 0.011
+  LoadShardBlock: 255.567 (3)
+  PetaboxLoader3.datanode: 99.294 (4)
+  CDXLines.iter: 18.055 (3)
+  load_resource: 208.876
+  PetaboxLoader3.resolve: 140.53
+*/

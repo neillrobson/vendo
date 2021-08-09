@@ -24,6 +24,37 @@ Axios.interceptors.request.use(async config => {
     return config;
 });
 
+const ACCOUNTS = [
+    'FIG',
+    'CYN',
+    'FQL',
+    'GRN',
+    'BLU',
+    'RED',
+    'ORG',
+    'PPL',
+    'PNK',
+    'BEG',
+    'SKY',
+    'GRY',
+    'BLK',
+    'WHT',
+    'YLW',
+    'DGN',
+    'LIM',
+    'TEL',
+    'MNT',
+    'CHR',
+    'SCR',
+    'PLM',
+    'DPB',
+    'LAV',
+    'TEA',
+    'CHC',
+    'GLD',
+    'FST'
+];
+
 const state = {
     status: '',
     token: localStorage.getItem('token') || null
