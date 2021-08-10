@@ -17,12 +17,17 @@
         <label for="current-password">Current Password</label>
         <input id="current-password" type="password" v-model="currentPassword">
         <button class="button primary" type="submit" @click="submit">Submit</button>
+        <hr class="my-4">
+        <div class="flex gap-1">
+            <span v-for="id in accounts" :key="id" :class="id" class="box link flex-auto border cursor-pointer text-center">{{ id }}</span>
+        </div>
     </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import { UPDATE } from '@/store/types/auth';
+import { ACCOUNTS } from '@/store/constants';
 
 export default {
     data() {
@@ -32,7 +37,8 @@ export default {
             formRole: '',
             newPassword: '',
             newPasswordRetype: '',
-            currentPassword: ''
+            currentPassword: '',
+            accounts: ACCOUNTS
         };
     },
     computed: mapGetters(['username', 'role']),

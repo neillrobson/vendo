@@ -20,6 +20,7 @@
 
 <style lang="postcss" scoped>
 @import './style/main.css';
+@import './style/colors.css';
 
 .router-link {
     @apply font-bold cursor-pointer;
