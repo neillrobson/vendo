@@ -18,34 +18,14 @@
         <h2>Housekeeping</h2>
         <div class="grid grid-cols-2 items-center">
             <div>
-                <button class="button primary" @click="resetUsers">Reset Users</button>
+                <button class="button primary cursor-not-allowed" disabled>Reset Users</button>
             </div>
             <div>
                 Clear current user data and add the user
                 <code>nerob</code> with password
                 <code>letmein</code>.
+                Currently, this action is unnecessary because we use fake user data from <a href="//ramdomuser.me">the Random User API</a>.
             </div>
         </div>
     </div>
 </template>
-
-<script>
-import { LOCAL_STORAGE_KEY } from '@/scripts/mock-backend.js';
-import bcrypt from 'bcryptjs';
-
-const DEFAULT_USERS = {
-    nerob: {
-        username: 'nerob',
-        password: bcrypt.hashSync('letmein', 10),
-        role: 'user'
-    }
-};
-
-export default {
-    methods: {
-        resetUsers() {
-            localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(DEFAULT_USERS));
-        }
-    }
-};
-</script>

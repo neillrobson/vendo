@@ -57,7 +57,7 @@
 </style>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import { LOGIN, STATUS_SUCCESS, STATUS_LOADING, STATUS_ERROR } from '@/store/types/auth';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -83,16 +83,21 @@ export default {
         authStatus: state => state.auth.status
     }),
     methods: {
-        handleSubmit() {
-            const username = this.username;
-            const password = this.password;
-            this.$store.dispatch(LOGIN, { username, password }).then(() => {
+        ...mapActions({
+            login: LOGIN
+        }),
+        async handleSubmit() {
+            try {
+                await this.login();
+
                 if (this.$route.params.nextUrl != null) {
                     this.$router.push(this.$route.params.nextUrl);
                 } else {
                     this.$router.push('/');
                 }
-            }, () => {});
+            } catch (error) {
+                console.log(error);
+            }
         }
     }
 };

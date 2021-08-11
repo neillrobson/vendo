@@ -5,13 +5,12 @@
             | <router-link :to="{ name: 'Todo Application' }" class="router-link">Todo List</router-link>
             | <router-link :to="{ name: 'Timezone Converter' }" class="router-link">Timezone Converter</router-link>
             | <router-link :to="{ name: 'Account' }" class="router-link">My Account</router-link>
-            | <router-link :to="{ name: 'Register' }" class="router-link">Register</router-link>
             <span v-if="!isLoggedIn">
                 | <router-link :to="{ name: 'Login' }" class="router-link">Log In</router-link>
             </span>
             <span v-if="isLoggedIn">
                 | <a @click="logOut" class="router-link">Log Out</a>
-                | <span class="user">{{ username }}</span> <span class="account">{{ role }}</span>
+                | <span class="user">{{ visitorId }}</span> <span class="account">{{ accountId }}</span>
             </span>
         </div>
         <router-view />
@@ -43,8 +42,8 @@ export default {
         }),
         ...mapGetters([
             'isLoggedIn',
-            'username',
-            'role'
+            'visitorId',
+            'accountId'
         ])
     },
     methods: {
