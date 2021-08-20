@@ -2,8 +2,8 @@
     <div id="app">
         <div id="nav" class="p-8 text-center">
             <router-link :to="{ name: 'Home' }" class="router-link">Home</router-link>
-            | <router-link :to="{ name: 'Todo Application' }" class="router-link">Todo List</router-link>
-            | <router-link :to="{ name: 'Timezone Converter' }" class="router-link">Timezone Converter</router-link>
+            | <router-link :to="{ name: 'Todos' }" class="router-link">Todo List</router-link>
+            | <router-link :to="{ name: 'Timespans' }" class="router-link">Timespans</router-link>
             | <router-link :to="{ name: 'Account' }" class="router-link">My Account</router-link>
             <span v-if="!isLoggedIn">
                 | <router-link :to="{ name: 'Login' }" class="router-link">Log In</router-link>

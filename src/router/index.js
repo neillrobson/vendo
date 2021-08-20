@@ -14,7 +14,7 @@ const routes = [
     },
     {
         path: '/todo-app',
-        name: 'Todo Application',
+        name: 'Todos',
         component: () => import(/* webpackChunkName: "todo-application" */ '../views/TodoApplication.vue'),
         meta: {
             requiresAuth: true
@@ -30,7 +30,7 @@ const routes = [
     },
     {
         path: '/timezone',
-        name: 'Timezone Converter',
+        name: 'Timespans',
         component: () => import('../views/Timezone.vue')
     }
 ];
