@@ -10,10 +10,14 @@
                         v-on="inputEvents" />
                 </template>
             </DatePicker>
-            <label for="active-day-mask">Active Day Mask (base64)</label>
+            <label
+                for="active-day-mask"
+                :class="{ 'text-red-500': rawMaskParseError }">Active Day Mask (base64)</label>
             <input
                 id="active-day-mask"
                 v-model="activeDayMask"
+                @input="onMaskInput"
+                :class="{ 'border-red-500': rawMaskParseError }"
                 type="text" />
         </div>
         <Calendar
@@ -69,14 +73,19 @@ export default {
     data() {
         return {
             activeDayReference: new Date(),
-            activeDayMask: ''
+            activeDayMask: '',
+            rawMaskParseError: false
         };
     },
     computed: {
         rawMask() {
-            return atob(this.activeDayMask).split('').flatMap(
-                c => c.charCodeAt(0).toString(2).padStart(8, '0').split('').reverse()
-            );
+            try {
+                return atob(this.activeDayMask).split('').flatMap(
+                    c => c.charCodeAt(0).toString(2).padStart(8, '0').split('').reverse()
+                );
+            } catch (error) {
+                return [];
+            }
         },
         activeDayList() {
             return this.rawMask.reduce((acc, curr, idx) => {
@@ -126,6 +135,14 @@ export default {
             }
 
             this.activeDayMask = convertListToMask(dateList);
+        },
+        onMaskInput() {
+            try {
+                atob(this.activeDayMask);
+                this.rawMaskParseError = false;
+            } catch (error) {
+                this.rawMaskParseError = true;
+            }
         }
     }
 };
