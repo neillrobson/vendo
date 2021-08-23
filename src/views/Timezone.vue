@@ -18,12 +18,48 @@
         </div>
         <Calendar
             class="mx-auto"
-            :attributes="attributes" />
+            :attributes="attributes"
+            @dayclick="onDayClick" />
     </div>
 </template>
 
 <script>
 import { Calendar, DatePicker } from 'v-calendar';
+
+function sortedIndex(array, date) {
+    let low = 0;
+    let high = array.length;
+
+    while (low < high) {
+        const mid = (low + high) >>> 1;
+        if (array[mid].getTime() < date.getTime()) {
+            low = mid + 1;
+        } else {
+            high = mid;
+        }
+    }
+
+    return low;
+}
+
+function convertListToMask(list) {
+    const rawMask = list.reduce((acc, curr, idx, arr) => {
+        if (idx !== 0) {
+            const prev = arr[idx - 1];
+            const dayCount = Math.round((curr - prev) / 86400000);
+            acc = acc.concat(Array(dayCount - 1).fill(0));
+        }
+        acc.push(1);
+        return acc;
+    }, []);
+
+    let str = '';
+    for (let i = 0; i < rawMask.length; i += 8) {
+        str += String.fromCharCode(parseInt(rawMask.slice(i, i + 8).reverse().join(''), 2));
+    }
+
+    return btoa(str);
+}
 
 export default {
     components: {
@@ -72,6 +108,24 @@ export default {
                     dates: this.activeDayList
                 }
             ];
+        }
+    },
+    methods: {
+        onDayClick(day) {
+            const dateList = this.activeDayList;
+            const { date } = day;
+            const idx = sortedIndex(dateList, date);
+            if (dateList[idx] && dateList[idx].getTime() === date.getTime()) {
+                dateList.splice(idx, 1);
+            } else {
+                dateList.splice(idx, 0, date);
+            }
+
+            if (dateList.length && idx === 0) {
+                this.activeDayReference = dateList[0];
+            }
+
+            this.activeDayMask = convertListToMask(dateList);
         }
     }
 };
