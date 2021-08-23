@@ -73,8 +73,7 @@ export default {
     data() {
         return {
             activeDayReference: new Date(),
-            activeDayMask: '',
-            rawMaskParseError: false
+            activeDayMask: ''
         };
     },
     computed: {
@@ -85,6 +84,14 @@ export default {
                 );
             } catch (error) {
                 return [];
+            }
+        },
+        rawMaskParseError() {
+            try {
+                atob(this.activeDayMask);
+                return false;
+            } catch (error) {
+                return true;
             }
         },
         activeDayList() {
