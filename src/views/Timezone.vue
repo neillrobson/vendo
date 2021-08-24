@@ -19,6 +19,36 @@
                 @input="onMaskInput"
                 :class="{ 'border-red-500': rawMaskParseError }"
                 type="text" />
+            <fieldset class="border p-2" :disabled="!activeDayCountEnabled || null">
+                <legend class="px-2 py-1 border">
+                    <input id="active-day-count" type="checkbox" v-model="activeDayCountEnabled" class="inline w-auto m-0 mr-1">
+                    <label for="active-day-count" class="inline">Active Day Count</label>
+                </legend>
+                <label for="active-day-count-first">First</label>
+                <DatePicker v-model="activeDayCountFirst">
+                    <template v-slot="{ inputValue, inputEvents }">
+                        <input
+                            id="active-day-count-first"
+                            :value="inputValue"
+                            v-on="inputEvents" />
+                    </template>
+                </DatePicker>
+                <label for="active-day-count-period">Count</label>
+                <input
+                    id="active-day-count-period"
+                    v-model="activeDayCountCount"
+                    type="number" />
+                <label for="active-day-count-stride">Stride</label>
+                <input
+                    id="active-day-count-stride"
+                    v-model="activeDayCountStride"
+                    type="number" />
+                <label for="active-day-count-window">Window</label>
+                <input
+                    id="active-day-count-window"
+                    v-model="activeDayCountWindow"
+                    type="number" />
+            </fieldset>
         </div>
         <Calendar
             class="mx-auto"
@@ -29,6 +59,10 @@
 
 <script>
 import { Calendar, DatePicker } from 'v-calendar';
+
+function daysBetween(to, from) {
+    return Math.round((to - from) / 86400000);
+}
 
 function sortedIndex(array, date) {
     let low = 0;
@@ -50,8 +84,7 @@ function convertListToMask(list) {
     const rawMask = list.reduce((acc, curr, idx, arr) => {
         if (idx !== 0) {
             const prev = arr[idx - 1];
-            const dayCount = Math.round((curr - prev) / 86400000);
-            acc = acc.concat(Array(dayCount - 1).fill(0));
+            acc = acc.concat(Array(daysBetween(curr, prev) - 1).fill(0));
         }
         acc.push(1);
         return acc;
@@ -72,15 +105,20 @@ export default {
     },
     data() {
         return {
-            activeDayReference: new Date(),
-            activeDayMask: ''
+            activeDayReference: new Date(new Date().toDateString()),
+            activeDayMask: '',
+            activeDayCountEnabled: false,
+            activeDayCountFirst: new Date(new Date().toDateString()),
+            activeDayCountCount: 5,
+            activeDayCountStride: 2,
+            activeDayCountWindow: 4
         };
     },
     computed: {
         rawMask() {
             try {
                 return atob(this.activeDayMask).split('').flatMap(
-                    c => c.charCodeAt(0).toString(2).padStart(8, '0').split('').reverse()
+                    c => c.charCodeAt(0).toString(2).padStart(8, '0').split('').reverse().map(d => parseInt(d))
                 );
             } catch (error) {
                 return [];
@@ -96,13 +134,43 @@ export default {
         },
         activeDayList() {
             return this.rawMask.reduce((acc, curr, idx) => {
-                if (curr === '1') {
+                if (curr) {
                     const newDate = new Date(this.activeDayReference);
                     newDate.setDate(newDate.getDate() + idx);
                     acc.push(newDate);
                 }
                 return acc;
             }, []);
+        },
+        activeDayCountList() {
+            if (!this.activeDayCountEnabled) {
+                return [];
+            }
+
+            const startIndex = daysBetween(this.activeDayCountFirst, this.activeDayReference);
+            const endIndex = startIndex + this.activeDayCountCount * this.activeDayCountStride;
+            const acc = [];
+
+            for (
+                let maskIndex = startIndex;
+                maskIndex < endIndex;
+                maskIndex += this.activeDayCountStride
+            ) {
+                const sliceEnd = Math.min(maskIndex + 1, this.rawMask.length);
+                const sliceStart = Math.max(maskIndex + 1 - this.activeDayCountWindow, 0);
+                if (sliceEnd <= 0 || sliceStart >= this.rawMask.length) {
+                    continue;
+                }
+
+                const activeCount = this.rawMask.slice(sliceStart, sliceEnd).reduce((a, b) => a + b, 0);
+                if (activeCount) {
+                    const newDate = new Date(this.activeDayReference);
+                    newDate.setDate(newDate.getDate() + maskIndex);
+                    acc.push(newDate);
+                }
+            }
+
+            return acc;
         },
         attributes() {
             if (this.activeDayList.length === 0) return [];
@@ -119,9 +187,14 @@ export default {
                     }
                 },
                 {
-                    key: 'today',
+                    key: 'dates',
                     highlight: 'pink',
                     dates: this.activeDayList
+                },
+                {
+                    key: 'count-agg',
+                    dot: 'gray',
+                    dates: this.activeDayCountList
                 }
             ];
         }
