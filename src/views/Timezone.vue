@@ -143,12 +143,16 @@ export default {
             }, []);
         },
         activeDayCountList() {
-            if (!this.activeDayCountEnabled) {
+            if (!this.activeDayCountEnabled || this.activeDayCountStride < 0) {
                 return [];
             }
 
-            const startIndex = daysBetween(this.activeDayCountFirst, this.activeDayReference);
-            const endIndex = startIndex + this.activeDayCountCount * this.activeDayCountStride;
+            let startIndex = daysBetween(this.activeDayCountFirst, this.activeDayReference);
+            let endIndex = startIndex + this.activeDayCountCount * this.activeDayCountStride;
+            if (startIndex > endIndex) { // Accounting for negative counts (taking windows from before the first date)
+                [startIndex, endIndex] = [endIndex, startIndex];
+            }
+
             const acc = [];
 
             for (
@@ -156,8 +160,11 @@ export default {
                 maskIndex < endIndex;
                 maskIndex += this.activeDayCountStride
             ) {
-                const sliceEnd = Math.min(maskIndex + 1, this.rawMask.length);
-                const sliceStart = Math.max(maskIndex + 1 - this.activeDayCountWindow, 0);
+                let sliceEnd = Math.min(maskIndex + 1, this.rawMask.length);
+                let sliceStart = Math.max(maskIndex + 1 - this.activeDayCountWindow, 0);
+                if (sliceStart > sliceEnd) { // Accounting for negative window sizes (forward-looking windows)
+                    [sliceStart, sliceEnd] = [sliceEnd, sliceStart];
+                }
                 if (sliceEnd <= 0 || sliceStart >= this.rawMask.length) {
                     continue;
                 }
