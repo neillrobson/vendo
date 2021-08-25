@@ -10,14 +10,11 @@
                         v-on="inputEvents" />
                 </template>
             </DatePicker>
-            <label
-                for="active-day-mask"
-                :class="{ 'text-red-500': rawMaskParseError }">Active Day Mask (base64)</label>
+            <label for="active-day-mask">Active Day Mask (base64)</label>
             <input
                 id="active-day-mask"
+                ref="activeDayMask"
                 v-model="activeDayMask"
-                @input="onMaskInput"
-                :class="{ 'border-red-500': rawMaskParseError }"
                 type="text" />
             <fieldset class="border p-2" :disabled="!activeDayCountEnabled || null">
                 <legend class="px-2 py-1 border">
@@ -42,7 +39,8 @@
                 <input
                     id="active-day-count-stride"
                     v-model="activeDayCountStride"
-                    type="number" />
+                    type="number"
+                    min="1" />
                 <label for="active-day-count-window">Window</label>
                 <input
                     id="active-day-count-window"
@@ -124,14 +122,6 @@ export default {
                 return [];
             }
         },
-        rawMaskParseError() {
-            try {
-                atob(this.activeDayMask);
-                return false;
-            } catch (error) {
-                return true;
-            }
-        },
         activeDayList() {
             return this.rawMask.reduce((acc, curr, idx) => {
                 if (curr) {
@@ -206,6 +196,16 @@ export default {
             ];
         }
     },
+    watch: {
+        activeDayMask(value) {
+            try {
+                atob(value);
+                this.$refs.activeDayMask.setCustomValidity('');
+            } catch (error) {
+                this.$refs.activeDayMask.setCustomValidity('Invalid Base64 string');
+            }
+        }
+    },
     methods: {
         onDayClick(day) {
             const dateList = this.activeDayList;
@@ -222,14 +222,6 @@ export default {
             }
 
             this.activeDayMask = convertListToMask(dateList);
-        },
-        onMaskInput() {
-            try {
-                atob(this.activeDayMask);
-                this.rawMaskParseError = false;
-            } catch (error) {
-                this.rawMaskParseError = true;
-            }
         }
     }
 };

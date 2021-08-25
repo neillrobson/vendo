@@ -36,6 +36,10 @@ input:focus {
     @apply border-blue-400 outline-none;
 }
 
+input:invalid {
+    @apply border-red-500;
+}
+
 @tailwind components;
 
 .card {
