@@ -3,23 +3,51 @@
         <p v-if="errors.length">
             <strong>Please correct the following error(s):</strong>
             <ul>
-                <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
+                <li
+                    v-for="(error, index) in errors"
+                    :key="index">
+                    {{ error }}
+                </li>
             </ul>
         </p>
         <label for="username">Username (Visitor ID)</label>
-        <input id="username" type="text" v-model="formUsername">
+        <input
+            id="username"
+            v-model="formUsername"
+            type="text">
         <label for="role">Role (Account ID)</label>
-        <input id="role" type="text" v-model="formRole">
+        <input
+            id="role"
+            v-model="formRole"
+            type="text">
         <label for="new-password">New Password</label>
-        <input id="new-password" type="password" v-model="newPassword">
+        <input
+            id="new-password"
+            v-model="newPassword"
+            type="password">
         <label for="new-password-retype">Retype</label>
-        <input id="new-password-retype" type="password" v-model="newPasswordRetype">
+        <input
+            id="new-password-retype"
+            v-model="newPasswordRetype"
+            type="password">
         <label for="current-password">Current Password</label>
-        <input id="current-password" type="password" v-model="currentPassword">
-        <button class="button primary" type="submit" @click="submit">Submit</button>
+        <input
+            id="current-password"
+            v-model="currentPassword"
+            type="password">
+        <button
+            class="button primary"
+            type="submit"
+            @click="submit">
+            Submit
+        </button>
         <hr class="my-4">
         <div class="flex gap-1">
-            <span v-for="id in accounts" :key="id" :class="id" class="box link flex-auto border cursor-pointer text-center">{{ id }}</span>
+            <span
+                v-for="id in accounts"
+                :key="id"
+                :class="id"
+                class="box link flex-auto border cursor-pointer text-center">{{ id }}</span>
         </div>
     </div>
 </template>

@@ -3,11 +3,11 @@
         <div class="config">
             <label for="active-day-reference">Active Day Reference (start)</label>
             <DatePicker v-model="activeDayReference">
-                <template v-slot="{ inputValue, inputEvents }">
+                <template #default="{ inputValue, inputEvents }">
                     <input
                         id="active-day-reference"
                         :value="inputValue"
-                        v-on="inputEvents" />
+                        v-on="inputEvents">
                 </template>
             </DatePicker>
             <label for="active-day-mask">Active Day Mask (base64)</label>
@@ -15,37 +15,45 @@
                 id="active-day-mask"
                 ref="activeDayMask"
                 v-model="activeDayMask"
-                type="text" />
-            <fieldset class="border p-2" :disabled="!activeDayCountEnabled || null">
+                type="text">
+            <fieldset
+                class="border p-2"
+                :disabled="!activeDayCountEnabled || null">
                 <legend class="px-2 py-1 border">
-                    <input id="active-day-count" type="checkbox" v-model="activeDayCountEnabled" class="inline w-auto m-0 mr-1">
-                    <label for="active-day-count" class="inline">Active Day Count</label>
+                    <input
+                        id="active-day-count"
+                        v-model="activeDayCountEnabled"
+                        type="checkbox"
+                        class="inline w-auto m-0 mr-1">
+                    <label
+                        for="active-day-count"
+                        class="inline">Active Day Count</label>
                 </legend>
                 <label for="active-day-count-first">First</label>
                 <DatePicker v-model="activeDayCountFirst">
-                    <template v-slot="{ inputValue, inputEvents }">
+                    <template #default="{ inputValue, inputEvents }">
                         <input
                             id="active-day-count-first"
                             :value="inputValue"
-                            v-on="inputEvents" />
+                            v-on="inputEvents">
                     </template>
                 </DatePicker>
                 <label for="active-day-count-period">Count</label>
                 <input
                     id="active-day-count-period"
                     v-model="activeDayCountCount"
-                    type="number" />
+                    type="number">
                 <label for="active-day-count-stride">Stride</label>
                 <input
                     id="active-day-count-stride"
                     v-model="activeDayCountStride"
                     type="number"
-                    min="1" />
+                    min="1">
                 <label for="active-day-count-window">Window</label>
                 <input
                     id="active-day-count-window"
                     v-model="activeDayCountWindow"
-                    type="number" />
+                    type="number">
             </fieldset>
         </div>
         <Calendar

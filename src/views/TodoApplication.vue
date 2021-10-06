@@ -1,6 +1,9 @@
 <template>
     <div class="container text-center">
-        <img class="mx-auto" alt="Vue logo" src="../assets/logo.png">
+        <img
+            class="mx-auto"
+            alt="Vue logo"
+            src="../assets/logo.png">
         <TodoList />
     </div>
 </template>

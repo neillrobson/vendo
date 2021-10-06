@@ -1,20 +1,46 @@
 <template>
     <div>
-        <button id="open-new-todo-form" class="button icon" v-on:click="openForm" v-show="!isCreating">
+        <button
+            v-show="!isCreating"
+            id="open-new-todo-form"
+            class="button icon"
+            @click="openForm">
             <font-awesome-icon icon="plus" />
         </button>
-        <div class="card" v-show="isCreating">
+        <div
+            v-show="isCreating"
+            class="card">
             <div class="p-4">
-                <label id="new-todo-title-label" for="new-todo-title">Title</label>
-                <input id="new-todo-title" type="text" v-model="titleText">
-                <label id="new-todo-project-label" for="new-todo-project">Project</label>
-                <input id="new-todo-project" type="text" v-model="projectText">
+                <label
+                    id="new-todo-title-label"
+                    for="new-todo-title">Title</label>
+                <input
+                    id="new-todo-title"
+                    v-model="titleText"
+                    type="text">
+                <label
+                    id="new-todo-project-label"
+                    for="new-todo-project">Project</label>
+                <input
+                    id="new-todo-project"
+                    v-model="projectText"
+                    type="text">
             </div>
-            <div class="divider m-0"></div>
+            <div class="divider m-0" />
             <div class="p-4">
                 <div class="buttons">
-                    <button id="create-new-todo" class="blue button" v-on:click="sendForm">Create</button>
-                    <button id="close-new-todo-form" class="red button" v-on:click="closeForm">Cancel</button>
+                    <button
+                        id="create-new-todo"
+                        class="blue button"
+                        @click="sendForm">
+                        Create
+                    </button>
+                    <button
+                        id="close-new-todo-form"
+                        class="red button"
+                        @click="closeForm">
+                        Cancel
+                    </button>
                 </div>
             </div>
         </div>

@@ -18,7 +18,11 @@
         <h2>Housekeeping</h2>
         <div class="grid grid-cols-2 items-center">
             <div>
-                <button class="button primary cursor-not-allowed" disabled>Reset Users</button>
+                <button
+                    class="button primary cursor-not-allowed"
+                    disabled>
+                    Reset Users
+                </button>
             </div>
             <div>
                 Clear current user data and add the user

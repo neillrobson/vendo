@@ -1,60 +1,51 @@
 <template>
     <div class="container">
-        <img class="mx-auto" src="@/assets/logo.png" alt="Vue logo">
+        <img
+            class="mx-auto"
+            src="@/assets/logo.png"
+            alt="Vue logo">
         <form @submit.prevent="handleSubmit">
-            <div class="message" v-if="authStatus === STATUS_LOADING">
+            <div
+                v-if="authStatus === STATUS_LOADING"
+                class="message">
                 Logging in...
             </div>
-            <div class="message positive" v-if="authStatus === STATUS_SUCCESS">
+            <div
+                v-if="authStatus === STATUS_SUCCESS"
+                class="message positive">
                 You are authenticated!
             </div>
-            <div class="message negative" v-if="authStatus === STATUS_ERROR">
+            <div
+                v-if="authStatus === STATUS_ERROR"
+                class="message negative">
                 Invalid credentials
             </div>
             <div class="card p-4">
                 <div class="icon input">
                     <font-awesome-icon icon="user" />
-                    <input type="text" name="username" placeholder="Username" v-model="username">
+                    <input
+                        v-model="username"
+                        type="text"
+                        name="username"
+                        placeholder="Username">
                 </div>
                 <div class="icon input">
                     <font-awesome-icon icon="lock" />
-                    <input type="password" name="password" placeholder="Password" v-model="password">
+                    <input
+                        v-model="password"
+                        type="password"
+                        name="password"
+                        placeholder="Password">
                 </div>
-                <button class="primary button" type="submit">Log in</button>
+                <button
+                    class="primary button"
+                    type="submit">
+                    Log in
+                </button>
             </div>
         </form>
     </div>
 </template>
-
-<style scoped>
-.container {
-    max-width: 450px;
-}
-
-.message {
-    @apply p-3 mb-3 text-center rounded border bg-gray-100;
-}
-
-.message.positive {
-    @apply bg-green-100 border-green-500 text-green-700;
-}
-
-.message.negative {
-    @apply bg-red-100 border-red-500 text-red-700;
-}
-
-.icon.input {
-    @apply relative mb-3;
-}
-
-.icon.input svg {
-    @apply w-8 p-2 absolute h-full pointer-events-none left-0 opacity-50;
-}
-
-.icon.input input {
-    @apply m-0 pl-8;
-}
-</style>
 
 <script>
 import { mapState, mapActions } from 'vuex';
@@ -102,3 +93,33 @@ export default {
     }
 };
 </script>
+
+<style lang="postcss" scoped>
+.container {
+    max-width: 450px;
+}
+
+.message {
+    @apply p-3 mb-3 text-center rounded border bg-gray-100;
+}
+
+.message.positive {
+    @apply bg-green-100 border-green-500 text-green-700;
+}
+
+.message.negative {
+    @apply bg-red-100 border-red-500 text-red-700;
+}
+
+.icon.input {
+    @apply relative mb-3;
+}
+
+.icon.input svg {
+    @apply w-8 p-2 absolute h-full pointer-events-none left-0 opacity-50;
+}
+
+.icon.input input {
+    @apply m-0 pl-8;
+}
+</style>

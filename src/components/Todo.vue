@@ -1,31 +1,69 @@
 <template>
     <div class="card">
-        <div class="p-4" v-show="!isEditing">
-            <div class="font-bold text-lg my-1">{{ title }}</div>
-            <div class="text-sm text-gray-600">{{ project }}</div>
-            <div class="divider"></div>
+        <div
+            v-show="!isEditing"
+            class="p-4">
+            <div class="font-bold text-lg my-1">
+                {{ title }}
+            </div>
+            <div class="text-sm text-gray-600">
+                {{ project }}
+            </div>
+            <div class="divider" />
             <div class="buttons">
-                <button :id="makeId('edit-todo')" class="button icon" @click="showForm">
-                    <font-awesome-icon icon="edit" fixed-width />
+                <button
+                    :id="makeId('edit-todo')"
+                    class="button icon"
+                    @click="showForm">
+                    <font-awesome-icon
+                        icon="edit"
+                        fixed-width />
                 </button>
-                <button :id="makeId('delete-todo')" class="button icon" @click="deleteTodo(todo.id)">
-                    <font-awesome-icon icon="trash" fixed-width />
+                <button
+                    :id="makeId('delete-todo')"
+                    class="button icon"
+                    @click="deleteTodo(todo.id)">
+                    <font-awesome-icon
+                        icon="trash"
+                        fixed-width />
                 </button>
             </div>
         </div>
-        <div class="p-4" v-show="isEditing">
-            <label :id="`label-${titleInputId}`" :for="titleInputId">Title</label>
-            <input :id="titleInputId" type="text" v-model="title">
-            <label :id="`label-${projectInputId}`" :for="projectInputId">Project</label>
-            <input :id="projectInputId" type="text" v-model="project">
-            <button :id="makeId('todo-edit-close')" class="blue button" @click="hideForm">
+        <div
+            v-show="isEditing"
+            class="p-4">
+            <label
+                :id="`label-${titleInputId}`"
+                :for="titleInputId">Title</label>
+            <input
+                :id="titleInputId"
+                v-model="title"
+                type="text">
+            <label
+                :id="`label-${projectInputId}`"
+                :for="projectInputId">Project</label>
+            <input
+                :id="projectInputId"
+                v-model="project"
+                type="text">
+            <button
+                :id="makeId('todo-edit-close')"
+                class="blue button"
+                @click="hideForm">
                 Close
             </button>
         </div>
-        <div :id="makeId('todo-completed')" class="button attached green" v-show="todo.done">
+        <div
+            v-show="todo.done"
+            :id="makeId('todo-completed')"
+            class="button attached green">
             Completed
         </div>
-        <div :id="makeId('todo-complete')" class="button attached red" v-show="!todo.done" v-on:click="completeTodo(todo.id)">
+        <div
+            v-show="!todo.done"
+            :id="makeId('todo-complete')"
+            class="button attached red"
+            @click="completeTodo(todo.id)">
             Complete
         </div>
     </div>
@@ -44,7 +82,12 @@ export default {
         FontAwesomeIcon
     },
 
-    props: ['todo'],
+    props: {
+        todo: {
+            type: Object,
+            required: true
+        }
+    },
 
     data() {
         return {
