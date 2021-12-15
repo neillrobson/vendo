@@ -4,9 +4,8 @@
     "private": true,
     "scripts": {
         "prepare": "husky install",
-        "serve": "vue-cli-service serve",
+        "start": "vue-cli-service serve",
         "build": "vue-cli-service build",
-        "lint": "vue-cli-service lint",
         "postbuild": "cp dist/index.html dist/404.html",
         "test": "npx jest"
     },
