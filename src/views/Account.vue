@@ -1,53 +1,41 @@
 <template>
     <div class="container">
-        <p v-if="errors.length">
+        <div v-if="errors.length">
             <strong>Please correct the following error(s):</strong>
             <ul>
-                <li
-                    v-for="(error, index) in errors"
-                    :key="index">
+                <li v-for="(error, index) in errors" :key="index">
                     {{ error }}
                 </li>
             </ul>
-        </p>
+        </div>
         <label for="username">Username (Visitor ID)</label>
-        <input
-            id="username"
-            v-model="formUsername"
-            type="text">
+        <input id="username" v-model="formUsername" type="text" />
         <label for="role">Role (Account ID)</label>
-        <input
-            id="role"
-            v-model="formRole"
-            type="text">
+        <input id="role" v-model="formRole" type="text" />
         <label for="new-password">New Password</label>
-        <input
-            id="new-password"
-            v-model="newPassword"
-            type="password">
+        <input id="new-password" v-model="newPassword" type="password" />
         <label for="new-password-retype">Retype</label>
         <input
             id="new-password-retype"
             v-model="newPasswordRetype"
-            type="password">
+            type="password" />
         <label for="current-password">Current Password</label>
         <input
             id="current-password"
             v-model="currentPassword"
-            type="password">
-        <button
-            class="button primary"
-            type="submit"
-            @click="submit">
+            type="password" />
+        <button class="button primary" type="submit" @click="submit">
             Submit
         </button>
-        <hr class="my-4">
+        <hr class="my-4" />
         <div class="flex gap-1">
-            <span
+            <div
                 v-for="id in accounts"
                 :key="id"
                 :class="id"
-                class="box link flex-auto border cursor-pointer text-center">{{ id }}</span>
+                class="box link flex-auto border cursor-pointer text-center">
+                <span class="label">{{ id }}</span>
+            </div>
         </div>
     </div>
 </template>
