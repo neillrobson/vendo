@@ -13,7 +13,7 @@ import {
     STATUS_LOADING,
     PENDO_IDENTIFY
 } from '../types/auth';
-import pendoIdentify from '@/scripts/pendo';
+import { pendoIdentify, pendoClearSession } from '@/scripts/pendo';
 import { boundedBell } from '@/scripts/util';
 import { pick } from 'lodash';
 
@@ -68,7 +68,11 @@ const actions = {
         commit(AUTH_LOADING);
 
         try {
-            const response = await axios(`https://randomuser.me/api/?seed=${Math.floor(boundedBell(0, 100))}`);
+            const response = await axios(
+                `https://randomuser.me/api/?seed=${Math.floor(
+                    boundedBell(0, 100)
+                )}`
+            );
             if (response.data.error) {
                 throw new Error(response.data.error);
             }
@@ -87,6 +91,7 @@ const actions = {
         commit(VISITOR);
         commit(ACCOUNT);
         commit(AUTH_UNSET);
+        pendoClearSession();
     },
     [PENDO_IDENTIFY]({ state, getters }) {
         if (getters.isLoggedIn) {
