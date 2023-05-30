@@ -17,6 +17,9 @@ import { pendoIdentify, pendoClearSession } from '@/scripts/pendo';
 import { boundedBell } from '@/scripts/util';
 import { pick } from 'lodash';
 
+const TS_SECONDS = [1503510363, 1685453018, 1595459018];
+const TS_MILLISECONDS = [1503510363000, 1685453018000, 1595459018000];
+
 function getVisitorData(res) {
     return {
         id: res.login.username,
@@ -25,7 +28,9 @@ function getVisitorData(res) {
         gender: res.gender,
         dob: res.dob.date,
         age: res.dob.age,
-        nat: res.nat
+        nat: res.nat,
+        tsSeconds: TS_SECONDS[res.dob.age % 3],
+        tsMilliseconds: TS_MILLISECONDS[res.dob.age % 3]
     };
 }
 
