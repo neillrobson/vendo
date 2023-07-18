@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <h2>Guide Sandbox Time!</h2>
-        <iframe src="/vendo/frame/basic" frameborder="0"></iframe>
+        <iframe src="/vendo/frame/parent" frameborder="0"></iframe>
     </div>
 </template>
 

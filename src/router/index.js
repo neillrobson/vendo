@@ -60,6 +60,11 @@ const routes = [
         }
     },
     {
+        path: '/frame/parent',
+        name: 'Parent Iframe',
+        component: () => import('../frames/Parent.vue')
+    },
+    {
         path: '/frame/basic',
         name: 'Basic Iframe',
         component: () => import('../frames/Basic.vue')
