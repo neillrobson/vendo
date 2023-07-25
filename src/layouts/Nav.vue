@@ -5,8 +5,8 @@
                 Home
             </router-link>
             |
-            <router-link :to="{ name: 'Todos' }" class="router-link">
-                Todo List
+            <router-link :to="{ name: 'O\'Rly' }" class="router-link">
+                O'Rly Generator
             </router-link>
             |
             <router-link :to="{ name: 'Timespans' }" class="router-link">

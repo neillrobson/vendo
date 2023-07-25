@@ -44,6 +44,15 @@ const routes = [
         }
     },
     {
+        path: '/orly',
+        name: "O'Rly",
+        component: () => import('../views/Orly.vue'),
+        meta: {
+            layout: Nav,
+            requiresAuth: true
+        }
+    },
+    {
         path: '/timezone',
         name: 'Timespans',
         component: () => import('../views/Timezone.vue'),
