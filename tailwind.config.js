@@ -1,7 +1,5 @@
 module.exports = {
-    purge: [
-        './src/**/*.vue'
-    ],
+    content: ['./src/**/*.vue'],
     theme: {
         fontFamily: {
             sans: ['Avenir', 'Helvetica', 'Arial', 'sans-serif']
