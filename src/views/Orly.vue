@@ -39,7 +39,9 @@
                 </select>
                 <button class="button primary">Generate</button>
             </form>
-            <div><img :src="imgUrl" alt="" /></div>
+            <div class="flex justify-center items-center">
+                <img :src="imgUrl" alt="" />
+            </div>
         </div>
     </div>
 </template>
@@ -59,7 +61,7 @@ export default {
             colorCode: 0,
             guideText: '',
             guideTextPlacement: 'bottom_right',
-            imgUrl: ''
+            imgUrl: require('@/assets/sample.png')
         };
     },
     created() {
@@ -94,10 +96,9 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-iframe {
-    margin: auto;
-    width: 80%;
-    height: 50vh;
-    border: 1px solid black;
+img {
+    width: 300px;
+    height: 420px;
+    box-shadow: 7px 7px 30px rgba(64, 64, 64, 0.81);
 }
 </style>
