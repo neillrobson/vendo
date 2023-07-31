@@ -4,11 +4,23 @@
         <div class="grid grid-cols-2 gap-4">
             <form @submit.prevent="updateImage">
                 <label for="title">Title</label>
-                <input id="title" v-model="title" type="text" />
+                <input
+                    id="title"
+                    v-model="title"
+                    type="text"
+                    placeholder="Title Goes Here" />
                 <label for="topText">Top Text</label>
-                <input id="topText" v-model="topText" type="text" />
+                <input
+                    id="topText"
+                    v-model="topText"
+                    type="text"
+                    placeholder="This is top text." />
                 <label for="author">Author</label>
-                <input id="author" v-model="author" type="text" />
+                <input
+                    id="author"
+                    v-model="author"
+                    type="text"
+                    placeholder="Kanye West" />
                 <label for="animalCode">Animal Code</label>
                 <input
                     id="animalCode"
@@ -24,7 +36,11 @@
                     min="0"
                     max="16" />
                 <label for="guideText">Guide Text</label>
-                <input id="guideText" v-model="guideText" type="text" />
+                <input
+                    id="guideText"
+                    v-model="guideText"
+                    type="text"
+                    placeholder="The Definitive Guide" />
                 <label for="guideTextPlacement">Guide Text Placement</label>
                 <select
                     id="guideTextPlacement"
@@ -122,8 +138,8 @@ export default {
             title: '',
             topText: '',
             author: '',
-            animalCode: 1,
-            colorCode: 0,
+            animalCode: 2,
+            colorCode: 1,
             guideText: '',
             guideTextPlacement: 'bottom_right',
             imgUrl: require('@/assets/sample.png'),
@@ -164,12 +180,12 @@ export default {
             const res = await axios.get(BASE_LINK, {
                 responseType: 'arraybuffer',
                 params: {
-                    title: this.title,
-                    top_text: this.topText,
-                    author: this.author,
+                    title: this.title || undefined,
+                    top_text: this.topText || undefined,
+                    author: this.author || undefined,
                     image_code: this.animalCode,
                     theme: this.colorCode,
-                    guide_text: this.guideText,
+                    guide_text: this.guideText || undefined,
                     guide_text_placement: this.guideTextPlacement
                 }
             });
