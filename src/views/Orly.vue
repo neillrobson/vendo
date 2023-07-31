@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h2>O'Rly Generator</h2>
+        <h1>O'Rly Generator</h1>
         <div class="grid grid-cols-2 gap-4">
             <form @submit.prevent="updateImage">
                 <label for="title">Title</label>
@@ -44,6 +44,7 @@
             <div class="flex justify-center items-center">
                 <div class="preview">
                     <img
+                        class="preview-img"
                         :class="{
                             'opacity-50': loading
                         }"
@@ -68,6 +69,42 @@
                         </svg>
                         <span class="sr-only">Loading...</span>
                     </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="animals text-center">
+            <h2>Animal Codes</h2>
+            <p>
+                <i>
+                    The animal images are from the
+                    <a
+                        href="https://etc.usf.edu/clipart"
+                        target="_blank"
+                        rel="noopener">
+                        USF ClipArt ETC
+                    </a>
+                    project. They are used in this O RLY Cover Generator for the
+                    purposes of parody.
+                </i>
+            </p>
+            <br />
+            <div class="flex flex-wrap justify-center gap-x-10 gap-y-14">
+                <div v-for="i in 40" :key="i" class="animal">
+                    <img :src="require(`@/assets/animals/${i}.png`)" alt="" />
+                    <span>{{ i }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="colors text-center">
+            <h2>Color Codes</h2>
+            <div class="flex flex-wrap justify-center gap-5">
+                <div
+                    v-for="(code, i) in COLOR_CODES"
+                    :key="i"
+                    class="color"
+                    :style="{ 'background-color': code }">
+                    {{ i }}
                 </div>
             </div>
         </div>
@@ -100,6 +137,26 @@ export default {
             { value: 'bottom_left', text: 'Bottom Left' },
             { value: 'bottom_right', text: 'Bottom Right' }
         ];
+
+        this.COLOR_CODES = [
+            'rgba(85, 19, 93, 255)',
+            'rgba(113, 112, 110, 255)',
+            'rgba(128, 27, 42, 255)',
+            'rgba(184, 7, 33, 255)',
+            'rgba(101, 22, 28, 255)',
+            'rgba(80, 61, 189, 255)',
+            'rgba(225, 17, 5, 255)',
+            'rgba(6, 123, 176, 255)',
+            'rgba(247, 181, 0, 255)',
+            'rgba(0, 15, 118, 255)',
+            'rgba(168, 0, 155, 255)',
+            'rgba(0, 132, 69, 255)',
+            'rgba(0, 153, 157, 255)',
+            'rgba(1, 66, 132, 255)',
+            'rgba(177, 0, 52, 255)',
+            'rgba(55, 142, 25, 255)',
+            'rgba(133, 152, 0, 255)'
+        ];
     },
     methods: {
         async updateImage() {
@@ -127,13 +184,41 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-img {
-    width: 300px;
-    height: 420px;
+hr {
+    margin: 20px 0;
 }
 
 .preview {
     position: relative;
     box-shadow: 7px 7px 30px rgba(64, 64, 64, 0.81);
+}
+
+.preview-img {
+    width: 300px;
+    height: 420px;
+}
+
+.animals {
+    margin-bottom: 50px;
+}
+
+.animal {
+    position: relative;
+    width: 120px;
+    font-size: 26px;
+    text-align: center;
+}
+
+.animal img {
+    margin-bottom: 10px;
+}
+
+.color {
+    width: 90px;
+    height: 90px;
+    border-radius: 220px;
+    color: white;
+    font-size: 26px;
+    line-height: 90px;
 }
 </style>
