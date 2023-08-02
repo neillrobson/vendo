@@ -48,8 +48,7 @@ const routes = [
         name: "O'Rly",
         component: () => import('../views/Orly.vue'),
         meta: {
-            layout: Nav,
-            requiresAuth: true
+            layout: Nav
         }
     },
     {
