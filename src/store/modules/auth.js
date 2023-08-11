@@ -14,13 +14,16 @@ import {
     PENDO_IDENTIFY
 } from '../types/auth';
 import { pendoIdentify, pendoClearSession } from '@/scripts/pendo';
-import { boundedBell } from '@/scripts/util';
+import { boundedBell, hashCode, mod } from '@/scripts/util';
 import { pick } from 'lodash';
 
 const TS_SECONDS = [1503510363, 1685453018, 1595459018];
 const TS_MILLISECONDS = [1503510363000, 1685453018000, 1595459018000];
+const LANGUAGES = ['en', 'fr', 'de', 'es', 'it', 'ja', 'ko', 'pt', 'ru', 'zh'];
 
 function getVisitorData(res) {
+    const hash = hashCode(res.login.username);
+
     return {
         id: res.login.username,
         firstName: res.name.first,
@@ -29,8 +32,9 @@ function getVisitorData(res) {
         dob: res.dob.date,
         age: res.dob.age,
         nat: res.nat,
-        tsSeconds: TS_SECONDS[res.dob.age % 3],
-        tsMilliseconds: TS_MILLISECONDS[res.dob.age % 3]
+        visitorLang: LANGUAGES[mod(hash, LANGUAGES.length)],
+        tsSeconds: TS_SECONDS[mod(hash, TS_SECONDS.length)],
+        tsMilliseconds: TS_MILLISECONDS[mod(hash, TS_MILLISECONDS.length)]
     };
 }
 
