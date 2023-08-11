@@ -58,10 +58,58 @@
                     type="number" />
             </fieldset>
         </div>
-        <Calendar
-            class="mx-auto"
-            :attributes="attributes"
-            @dayclick="onDayClick" />
+        <div class="w-full">
+            <div class="w-fit mx-auto">
+                <Calendar :attributes="attributes" @dayclick="onDayClick" />
+            </div>
+            <br />
+            <h2>Quick Reference</h2>
+            <ul>
+                <li>
+                    Click dates on the calendar to mark individual days as
+                    "active."
+                </li>
+                <li>
+                    Active days are <em>dark pink</em>. The light pink highlight
+                    serves only as a visual indicator of the overall range
+                    between the first and last active day.
+                </li>
+                <li>
+                    The Active Days Count implementation
+                    <strong
+                        >probably isn't up to date with Pendo's
+                        implementation</strong
+                    >.
+                    <ul>
+                        <li>
+                            Count is the number of windows to generate (should
+                            always be positive)
+                        </li>
+                        <li>
+                            Stride is the number of days to shift each window
+                            (positive = forward, negative = backward)
+                        </li>
+                        <li>
+                            Window is the number of days in each window
+                            (positive = extend backwards, negative = extend
+                            forwards)
+                        </li>
+                        <li>
+                            A gray dot is shown on the <em>start day</em> of
+                            each window that contains at least one
+                            <em>active day</em>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    More information can be found
+                    <a
+                        href="https://pendo-io.atlassian.net/wiki/spaces/ENG/pages/2355200034/Basic+Field+Aggregators#daysActiveCount"
+                        >on Confluence</a
+                    >.
+                </li>
+            </ul>
+        </div>
     </div>
 </template>
 

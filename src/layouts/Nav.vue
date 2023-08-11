@@ -28,7 +28,7 @@
             </span>
             <span v-if="isLoggedIn">
                 | <a class="router-link" @click="logOut">Log Out</a> |
-                <span class="user">{{ visitorId }}</span>
+                <span class="user">{{ visitorId }}</span> /
                 <span class="account">{{ accountId }}</span>
             </span>
         </div>
