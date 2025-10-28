@@ -1,23 +1,14 @@
 <template>
     <div class="container">
-        <img
-            class="mx-auto"
-            src="@/assets/logo.png"
-            alt="Vue logo">
+        <img class="mx-auto" src="@/assets/logo.png" alt="Vue logo" />
         <form @submit.prevent="handleSubmit">
-            <div
-                v-if="authStatus === STATUS_LOADING"
-                class="message">
+            <div v-if="authStatus === STATUS_LOADING" class="message">
                 Logging in...
             </div>
-            <div
-                v-if="authStatus === STATUS_SUCCESS"
-                class="message positive">
+            <div v-if="authStatus === STATUS_SUCCESS" class="message positive">
                 You are authenticated!
             </div>
-            <div
-                v-if="authStatus === STATUS_ERROR"
-                class="message negative">
+            <div v-if="authStatus === STATUS_ERROR" class="message negative">
                 Invalid credentials
             </div>
             <div class="card p-4">
@@ -27,7 +18,7 @@
                         v-model="username"
                         type="text"
                         name="username"
-                        placeholder="Username">
+                        placeholder="Username" />
                 </div>
                 <div class="icon input">
                     <font-awesome-icon icon="lock" />
@@ -35,13 +26,9 @@
                         v-model="password"
                         type="password"
                         name="password"
-                        placeholder="Password">
+                        placeholder="Password" />
                 </div>
-                <button
-                    class="primary button"
-                    type="submit">
-                    Log in
-                </button>
+                <button class="primary button" type="submit">Log in</button>
             </div>
         </form>
     </div>
@@ -49,7 +36,12 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import { LOGIN, STATUS_SUCCESS, STATUS_LOADING, STATUS_ERROR } from '@/store/types/auth';
+import {
+    LOGIN,
+    STATUS_SUCCESS,
+    STATUS_LOADING,
+    STATUS_ERROR
+} from '@/store/types/auth';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
@@ -71,7 +63,7 @@ export default {
         };
     },
     computed: mapState({
-        authStatus: state => state.auth.status
+        authStatus: (state) => state.auth.status
     }),
     methods: {
         ...mapActions({
@@ -95,6 +87,8 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
+@reference '../style/main.css';
+
 .container {
     max-width: 450px;
 }

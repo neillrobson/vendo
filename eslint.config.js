@@ -7,11 +7,20 @@ import eslintPluginVue from 'eslint-plugin-vue';
 export default defineConfig(
     {
         languageOptions: {
-            ecmaVersion: 2020
+            ecmaVersion: 2020,
+            globals: {
+                ...globals.node,
+                ...globals.browser
+            }
         }
     },
     js.configs.recommended,
     ...eslintPluginVue.configs['flat/recommended'],
+    {
+        rules: {
+            'vue/multi-word-component-names': 'off'
+        }
+    },
     {
         files: ['**/*.spec.{j,t}s?(x)'],
         languageOptions: {
