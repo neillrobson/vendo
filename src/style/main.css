@@ -1,4 +1,4 @@
-@tailwind base;
+@import "tailwindcss";
 
 body {
     @apply font-sans antialiased text-gray-800;
@@ -53,8 +53,6 @@ select {
 select:focus {
     @apply ring-blue-500 border-blue-500;
 }
-
-@tailwind components;
 
 .card {
     @apply mx-auto my-4 border border-gray-400 shadow rounded;
@@ -132,5 +130,3 @@ select:focus {
 .divider {
     @apply border-t border-gray-400 my-4;
 }
-
-@tailwind utilities;

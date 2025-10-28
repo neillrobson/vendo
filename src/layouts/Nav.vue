@@ -60,8 +60,7 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-@import '@/style/main.css';
-@import '@/style/colors.css';
+@reference '../style/main.css';
 
 .router-link {
     @apply font-bold cursor-pointer;

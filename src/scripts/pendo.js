@@ -1,5 +1,3 @@
-import { JWT } from 'jsonwebtoken';
-
 /* eslint-disable */
 // prettier-ignore
 (function(apiKey){
@@ -21,7 +19,7 @@ export function pendoIdentify(userData, useJWT = false) {
 
     const payload = useJWT
         ? {
-              jwt: JWT.sign(userData, JWTSigningKey),
+              // jwt: JWT.sign(userData, JWTSigningKey),
               signingKeyName: JWTKeyName
           }
         : userData;

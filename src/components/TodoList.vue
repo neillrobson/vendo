@@ -12,8 +12,8 @@
 
 <script>
 import { mapState } from 'vuex';
-import Todo from './Todo';
-import CreateTodo from './CreateTodo';
+import Todo from './Todo.vue';
+import CreateTodo from './CreateTodo.vue';
 
 export default {
     components: {
