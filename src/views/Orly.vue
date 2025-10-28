@@ -106,9 +106,9 @@
             </p>
             <br />
             <div class="flex flex-wrap justify-center gap-x-10 gap-y-14">
-                <div v-for="i in 40" :key="i" class="animal">
-                    <img :src="require(`@/assets/animals/${i}.png`)" alt="" />
-                    <span>{{ i }}</span>
+                <div v-for="(url, i) of ANIMAL_IMGS" :key="i" class="animal">
+                    <img :src="url" alt="" />
+                    <span>{{ i + 1 }}</span>
                 </div>
             </div>
         </div>
@@ -131,6 +131,7 @@
 import axios from 'axios';
 const BASE_LINK =
     'https://faas-nyc1-2ef2e6cc.doserverless.co/api/v1/web/fn-a628dc7f-5ceb-49d3-a207-10052ef6bac5/orly/generate';
+import sample from '@/assets/sample.png';
 
 export default {
     data() {
@@ -142,7 +143,7 @@ export default {
             colorCode: 1,
             guideText: '',
             guideTextPlacement: 'bottom_right',
-            imgUrl: require('@/assets/sample.png'),
+            imgUrl: sample,
             loading: false
         };
     },
@@ -173,6 +174,11 @@ export default {
             'rgba(55, 142, 25, 255)',
             'rgba(133, 152, 0, 255)'
         ];
+
+        this.ANIMAL_IMGS = [...Array(40).keys()].map(
+            (i) =>
+                new URL(`../assets/animals/${i + 1}.png`, import.meta.url).href
+        );
     },
     methods: {
         async updateImage() {

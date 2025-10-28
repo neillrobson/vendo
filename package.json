@@ -2,6 +2,7 @@
     "name": "vendo",
     "version": "3.0.0",
     "private": true,
+    "sourceType": "module",
     "scripts": {
         "prepare": "husky",
         "start": "vite",
@@ -47,11 +48,6 @@
         "prettier": "^3.6.2",
         "vite": "^7.1.12"
     },
-    "browserslist": [
-        "> 1%",
-        "last 2 versions",
-        "not dead"
-    ],
     "lint-staged": {
         "**/*.{js,json,vue}": [
             "prettier --write"
